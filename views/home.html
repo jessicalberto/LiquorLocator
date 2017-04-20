@@ -17,6 +17,8 @@ We likely won't do height, mostly weight and gender, so that's something to keep
   <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 </head>
 
+<title>The Liquor Locator.</title>
+
 <!-- controller later to be migrated in separate file, so need to move
 this <script> body into a separate folder called controller.js, and then
 just add it as a link rel ^ in head, probably should do this soon, as this
@@ -129,45 +131,159 @@ function w3_close() {
 </body>
 </div>
 
-<br><br><br>
+<br><br><br><br><br><br><br>
+<br>
+<center><h3>Where do you want to go?</h3><br></center>
 
 
-    <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html>
   <head>
-
-    <meta name="viewport" content="initial-scale=1.0">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
-
-      #map {
-        height: 400px;
-        width: 500px;
+      #right-panel {
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
       }
 
+      #right-panel select, #right-panel input {
+        font-size: 15px;
+      }
+
+      #right-panel select {
+        width: 100%;
+      }
+
+      #right-panel i {
+        font-size: 12px;
+      }
       html, body {
         height: 100%;
         margin: 0;
         padding: 0;
       }
+      #map {
+        height: 500px;
+        float: left;
+        width: 700px;
+        height: 500px;
+      }
+      #right-panel {
+        margin: 20px;
+        border-width: 2px;
+        width: 20%;
+        height: 400px;
+        float: left;
+        text-align: left;
+        padding-top: 0;
+      }
+      #directions-panel {
+        margin-top: 10px;
+        background-color: #FFEE77;
+        padding: 10px;
+        overflow: scroll;
+        height: 174px;
+      }
     </style>
   </head>
   <body>
     <div id="map"></div>
-     <script>
-      var map;
+    <div id="right-panel">
+    <div>
+    <b>Start:</b>
+    <select id="start">
+        <option value="10 Buick Street, Boston, MA 02215">Stuvi 1 - 10 Buick Street</option>
+        <option value="33 Harry Agganis Way, Boston, MA 02215">Stuvi 2 - 33 Harry Agganis Way</option>
+        <option value="700 Commonwealth Avenue, Boston, MA 02215">Warren Towers, Boston University</option>    
+    </select>
+    <br>
+    <b>Waypoints:</b> <br>
+    <i>(Ctrl+Click or Cmd+Click for multiple selection)</i> <br>
+    <select multiple id="waypoints">
+      <option value="Fenway Park, Boston">Fenway Park</option>
+      <option value="Boston Commons">Boston Commons</option>
+      465 Huntington Ave, Boston, MA 02115
+      <option value="465 Huntington Ave, Boston, MA 02115">Museum of Fine Arts</option>
+      <option value="91 Bay State Road, Boston, MA 02215">Kilachand Hall, Boston University</option>
+    </select>
+    <br>
+    <b>End:</b>
+    <select id="end">
+        <option value="10 Buick Street, Boston, MA 02215">Stuvi 1 - 10 Buick Street</option>
+        <option value="33 Harry Agganis Way, Boston, MA 02215">Stuvi 2 - 33 Harry Agganis Way</option>
+        <option value="700 Commonwealth Avenue, Boston, MA 02215">Warren Towers, Boston University</option>
+
+    </select>
+    <br>
+      <input type="submit" id="submit">
+    </div>
+    <div id="directions-panel"></div>
+    </div>
+    <script>
       function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 42.361, lng: -71.105},
-          zoom: 12
+        var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: {lat: 42.361, lng: -71.105}
+        });
+        directionsDisplay.setMap(map);
+
+        document.getElementById('submit').addEventListener('click', function() {
+          calculateAndDisplayRoute(directionsService, directionsDisplay);
+        });
+      }
+
+      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        var waypts = [];
+        var checkboxArray = document.getElementById('waypoints');
+        for (var i = 0; i < checkboxArray.length; i++) {
+          if (checkboxArray.options[i].selected) {
+            waypts.push({
+              location: checkboxArray[i].value,
+              stopover: true
+            });
+          }
+        }
+
+        directionsService.route({
+          origin: document.getElementById('start').value,
+          destination: document.getElementById('end').value,
+          waypoints: waypts,
+          optimizeWaypoints: true,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+            var route = response.routes[0];
+            var summaryPanel = document.getElementById('directions-panel');
+            summaryPanel.innerHTML = '';
+            // For each route, display summary information.
+            for (var i = 0; i < route.legs.length; i++) {
+              var routeSegment = i + 1;
+              summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
+                  '</b><br>';
+              summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+              summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+              summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+            }
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
         });
       }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3AC6WEEZVQiqTVJsfbObHG-Pj6wwQaIc&callback=initMap"
-    async defer></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3AC6WEEZVQiqTVJsfbObHG-Pj6wwQaIc&callback=initMap">
+    </script>
   </body>
 </html>
 
 <br><br><br><br><br><br><br><br><br><br>
 
 <center> Created by Group 7 <br>CS411 Software Engineering - Spring 2017 <br> Boston University</center>
+
+<br><br><br><br><br><br><br><br><br><br>
