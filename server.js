@@ -86,7 +86,8 @@ googleMapsClient.directions({
 }, function(err, response) {
   if (!err) {
     console.log(response.json);
-    console.log(response.json.geocoded_waypoints.place_id);
+    var originid = response.json.geocoded_waypoints[0].place_id;
+    var destinationid = response.json.geocoded_waypoints[1].place_id;
   }
 });
 
