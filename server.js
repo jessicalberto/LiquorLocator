@@ -27,10 +27,11 @@ it doesn't exist => make an API call, give the user the results, and then store
 these queryterm/querylocation in our database, so the NEXT time someone searches
 "Donuts, Seattle", instead of making that API call, we just return the results from
 the db.
-tl;dr cache
+
 We parsed the API result to display the top 3 restaurants/bars that return what
 you're looking for, along with its average star rating and its address.
 */
+
 var resultSchema = new Schema({
   queryterm: String,
   querylocation: String,
@@ -62,7 +63,6 @@ but we are held kind of contingent to the data types that Yelp API returns
 Strings seem to be the easiest as of now.
 */
 
-
 /*LOGIN FOR TWITTER OAUTH PASSPORT */
 
 var keys = require('./config');
@@ -72,6 +72,26 @@ var myKey = keys.mykey;
 var secretKey= keys.secretkey;
 var myconsumerKey = keys.consumerKey;
 var myconsumerSecret = keys.consumerSecret;
+var mygoogleKey = keys.googleKey;
+
+//google maps block
+
+var googleMapsClient = require('@google/maps').createClient({
+  key: mygoogleKey
+});
+
+googleMapsClient.directions({
+  origin:  "575 Commonwealth Avenue, Boston, MA",
+  destination: "500 Boylston Street, Boston, MA",
+}, function(err, response) {
+  if (!err) {
+    console.log(response.json);
+    console.log(response.json.geocoded_waypoints.place_id);
+  }
+});
+
+//https://maps.googleapis.com/maps/api/directions/json?origin=place_id:ChIJ685WIFYViEgRHlHvBbiD5nE&destination=place_id:ChIJA01I-8YVhkgRGJb0fW4UX7Y&key=YOUR_API_KEY
+
 
 //Using the npm package of passport/twitter strategy to setup our Twitter oauth, base syntax (lifted & shifted)
 passport.use(new Strategy ({
@@ -187,7 +207,7 @@ const token = yelp.accessToken(myKey, secretKey).then(response => {
           var biz_id = response.jsonBody.businesses[0].id;
 
           console.log("***FIRST THREE RESULTS***");
-          
+
           //This variable is just to consolidate/simplify response.jsonBody every time
           var setresp = response.jsonBody;
 
