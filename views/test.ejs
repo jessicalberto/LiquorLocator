@@ -136,12 +136,10 @@ each of the data in their own bullet point.
     <b>Waypoints:</b> <br>
     <i>(Ctrl+Click or Cmd+Click for multiple selection)</i> <br>
     <select multiple id="waypoints">
-      <option value="Fenway Park, Boston">Fenway Park</option>
-      <option value="Boston Commons">Boston Commons</option>
-      465 Huntington Ave, Boston, MA 02115
-      <option value="465 Huntington Ave, Boston, MA 02115">Museum of Fine Arts</option>
-      <option value="161 Brighton Ave, Boston, MA 02134">Tavern In The Square (TITS) </option>
-      <option value="91 Bay State Road, Boston, MA 02215">Kilachand Hall, Boston University</option>
+      <option value=<%= location1%>><%= result1%></option>
+      <option value=<%= location2%>><%= result2%></option>
+      <option value=<%= location3%>><%= result3%></option>
+
     </select>
     <br>
     <b>End:</b>
@@ -213,7 +211,7 @@ each of the data in their own bullet point.
       }
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3AC6WEEZVQiqTVJsfbObHG-Pj6wwQaIc&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYiA5Ykmkmoq306via93D0CnTz_QruAII&callback=initMap">
     </script>
   </body>
 </html>

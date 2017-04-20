@@ -223,21 +223,21 @@ const token = yelp.accessToken(myKey, secretKey).then(response => {
           // Storing the data/results from the first result (RESTAURANT/BAR 1)
           var result1 = " Name: " + setresp.businesses[0].name;
           var rate1 = " Rating: " + setresp.businesses[0].rating;
-          var location1 = " Location: " + setresp.businesses[0].location.display_address;
+          var location1 = setresp.businesses[0].location.display_address;
           var priceRange1 = "Price Level: " + setresp.businesses[0].price;
           var image1 = setresp.businesses[0].image_url;
 
           // Storing the data/results from the first result (RESTAURANT/BAR 2)
           var result2 = " Name: " + setresp.businesses[1].name;
           var rate2 = " Rating: " + setresp.businesses[1].rating;
-          var location2 = " Location: " + setresp.businesses[1].location.display_address;
+          var location2 = setresp.businesses[1].location.display_address;
           var priceRange2 = "Price Level: " + setresp.businesses[1].price;
           var image2 = setresp.businesses[1].image_url;
 
           // Storing the data/results from the first result (RESTAURANT/BAR 3)
           var result3 = " Name: " + setresp.businesses[2].name;
           var rate3 = " Rating: " + setresp.businesses[2].rating;
-          var location3 = " Location: " + setresp.businesses[2].location.display_address;
+          var location3 = setresp.businesses[2].location.display_address;
           var priceRange3 = "Price Level: " + setresp.businesses[2].price;
           var image3 = setresp.businesses[2].image_url;
 
