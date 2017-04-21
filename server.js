@@ -166,7 +166,7 @@ const token = yelp.accessToken(myKey, secretKey).then(response => {
     ];
 
     //Using .render instead of .sendFile or .send because of static HTML constraints
-    res.render(__dirname + "/views/test.ejs", {
+    res.render(__dirname + "/views/searchResult.ejs", {
       drinks: drinks,
     });
   });
@@ -191,7 +191,7 @@ const token = yelp.accessToken(myKey, secretKey).then(response => {
     db.collection("results").find( {queryterm: req.query.search, querylocation: req.query.location}).toArray(function(err, result) {
       if (result != "") {
         console.log("Found!  An entry for THIS query already exists in database.");
-        res.render(__dirname + "/views/test2.ejs", {result});
+        res.render(__dirname + "/views/cachedResult.ejs", {result});
         console.log(result);
       }
 
@@ -221,21 +221,21 @@ const token = yelp.accessToken(myKey, secretKey).then(response => {
           console.log("Price Level: " + setresp.businesses[0].price);
 
           // Storing the data/results from the first result (RESTAURANT/BAR 1)
-          var result1 = " Name: " + setresp.businesses[0].name;
+          var result1 = setresp.businesses[0].name;
           var rate1 = " Rating: " + setresp.businesses[0].rating;
           var location1 = setresp.businesses[0].location.display_address;
           var priceRange1 = "Price Level: " + setresp.businesses[0].price;
           var image1 = setresp.businesses[0].image_url;
 
           // Storing the data/results from the first result (RESTAURANT/BAR 2)
-          var result2 = " Name: " + setresp.businesses[1].name;
+          var result2 = setresp.businesses[1].name;
           var rate2 = " Rating: " + setresp.businesses[1].rating;
           var location2 = setresp.businesses[1].location.display_address;
           var priceRange2 = "Price Level: " + setresp.businesses[1].price;
           var image2 = setresp.businesses[1].image_url;
 
           // Storing the data/results from the first result (RESTAURANT/BAR 3)
-          var result3 = " Name: " + setresp.businesses[2].name;
+          var result3 = setresp.businesses[2].name;
           var rate3 = " Rating: " + setresp.businesses[2].rating;
           var location3 = setresp.businesses[2].location.display_address;
           var priceRange3 = "Price Level: " + setresp.businesses[2].price;
@@ -277,9 +277,9 @@ const token = yelp.accessToken(myKey, secretKey).then(response => {
           //Logging to confirm that the insertion in db is successful.
           console.log("INSERT SUCCESSFUL");
 
-          //Thus, render this new page, test.ejs, and pass in all these data vars so that we may display
+          //Thus, render this new page, searchResult.ejs, and pass in all these data vars so that we may display
           //them on the front end
-          res.render(__dirname + "/views/test.ejs", { result1,rate1,location1, image1,priceRange1,result2,rate2,location2,image2,priceRange2,result3,rate3,location3, image3,priceRange3});
+          res.render(__dirname + "/views/searchResult.ejs", { result1,rate1,location1, image1,priceRange1,result2,rate2,location2,image2,priceRange2,result3,rate3,location3, image3,priceRange3});
 
           //Currently not doing anything with reviews, this is just a block of code just to play around with,
           //but it currently doesn't do anything.
