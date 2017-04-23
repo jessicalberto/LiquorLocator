@@ -74,26 +74,6 @@ var myconsumerKey = keys.consumerKey;
 var myconsumerSecret = keys.consumerSecret;
 var mygoogleKey = keys.googleKey;
 
-//google maps block
-
-var googleMapsClient = require('@google/maps').createClient({
-  key: mygoogleKey
-});
-
-googleMapsClient.directions({
-  origin:  "575 Commonwealth Avenue, Boston, MA",
-  destination: "500 Boylston Street, Boston, MA",
-}, function(err, response) {
-  if (!err) {
-    console.log(response.json);
-    var originid = response.json.geocoded_waypoints[0].place_id;
-    var destinationid = response.json.geocoded_waypoints[1].place_id;
-  }
-});
-
-//https://maps.googleapis.com/maps/api/directions/json?origin=place_id:ChIJ685WIFYViEgRHlHvBbiD5nE&destination=place_id:ChIJA01I-8YVhkgRGJb0fW4UX7Y&key=YOUR_API_KEY
-
-
 //Using the npm package of passport/twitter strategy to setup our Twitter oauth, base syntax (lifted & shifted)
 passport.use(new Strategy ({
   consumerKey: myconsumerKey,

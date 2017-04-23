@@ -19,39 +19,55 @@ each of the data in their own bullet point.
 
 <body>
 
-<center><h2>Displaying the Top 3 Local Results:</h2></center>
+<center>
+<a href="http://s347.photobucket.com/user/shawtyjesshhicuhh/media/UnJIsXuL_zpsxpj4fwd9.gif.html" target="_blank"><img src="http://i347.photobucket.com/albums/p449/shawtyjesshhicuhh/UnJIsXuL_zpsxpj4fwd9.gif" border="0" alt=" photo UnJIsXuL_zpsxpj4fwd9.gif"/></a>
+
+<br/>
+
+<h2>Displaying the Top 3 Local Results (Cached):</h2>
+
+</center>
+<center>
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
+
   <h3><%= result[0].restaurant1 %></h3>
+  <img src="<%= result[0].photo1%>" border="0" alt=" photo yelp1.jpg" width="250" height="200" />
     <ul>
-      <li><%= result[0].rating1 %></li>
+      <b><%= result[0].restaurant1 %></b>
+      <li><%= result[0].rating1 %> stars</li>
+      <li><%= result[0].price1 %></li>
       <li><%= result[0].address1%></li>
     </ul>
   </div>
 
   <div class="col-sm-4">
   <h3><%= result[0].restaurant2 %></h3>
+  <img src="<%= result[0].photo2%>" border="0" alt=" photo yelp1.jpg" width="250" height="200" />
     <ul>
-      <li><%= result[0].rating2 %></li>
+      <b><%= result[0].restaurant2 %></b>
+      <li><%= result[0].rating2 %> stars</li>
+      <li><%= result[0].price2 %></li>
       <li><%= result[0].address2 %></li>
     </ul>
   </div>
 
   <div class="col-sm-4">
     <h3><%= result[0].restaurant3 %></h3>
+    <img src="<%= result[0].photo3%>" border="0" alt=" photo yelp1.jpg" width="250" height="200" />
       <ul>
-        <li><%= result[0].rating3 %></li>
+        <b><%= result[0].restaurant3 %></b>
+        <li><%= result[0].rating3 %> stars</li>
+        <li><%= result[0].price3 %></li>
         <li><%= result[0].address3%></li>
     </ul>
   </div>
 </body>
+</center>
 
-<br><br><br>
 
-
-<br><br><br>
-<br>
+<br><br><br><br>
 <center><h3>Where do you want to go?</h3><br></center>
 
 
@@ -126,12 +142,9 @@ each of the data in their own bullet point.
     <b>Waypoints:</b> <br>
     <i>(Ctrl+Click or Cmd+Click for multiple selection)</i> <br>
     <select multiple id="waypoints">
-      <option value="Fenway Park, Boston">Fenway Park</option>
-      <option value="Boston Commons">Boston Commons</option>
-      465 Huntington Ave, Boston, MA 02115
-      <option value="465 Huntington Ave, Boston, MA 02115">Museum of Fine Arts</option>
-      <option value="161 Brighton Ave, Boston, MA 02134">Tavern In The Square (TITS) </option>
-      <option value="91 Bay State Road, Boston, MA 02215">Kilachand Hall, Boston University</option>
+      <option value="<%= result[0].address1 %>"><%= result[0].restaurant1 %></option>
+      <option value="<%= result[0].address2 %>"><%= result[0].restaurant2 %></option>
+      <option value="<%= result[0].address3 %>"><%= result[0].restaurant3 %></option>
     </select>
     <br>
     <b>End:</b>
@@ -180,7 +193,7 @@ each of the data in their own bullet point.
           destination: document.getElementById('end').value,
           waypoints: waypts,
           optimizeWaypoints: true,
-          travelMode: 'DRIVING'
+          travelMode: 'WALKING'
         }, function(response, status) {
           if (status === 'OK') {
             directionsDisplay.setDirections(response);
