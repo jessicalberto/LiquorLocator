@@ -19,27 +19,32 @@ each of the data in their own bullet point.
 
 <body>
 
-<h2>Displaying the Top 3 Local Results:</h2>
-
-  <h3><%= JSON.stringify(result[0].restaurant1)%></h3>
-
-
+<center><h2>Displaying the Top 3 Local Results:</h2></center>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+  <h3><%= result[0].restaurant1 %></h3>
     <ul>
-      <li><%= JSON.stringify(result[0].rating1)%></li>
-      <li><%= JSON.stringify(result[0].address1)%></li>
+      <li><%= result[0].rating1 %></li>
+      <li><%= result[0].address1%></li>
     </ul>
+  </div>
 
-  <h3><%= JSON.stringify(result[0].restaurant2)%></h3>
+  <div class="col-sm-4">
+  <h3><%= result[0].restaurant2 %></h3>
     <ul>
-      <li><%= JSON.stringify(result[0].rating2)%></li>
-      <li><%= JSON.stringify(result[0].address2)%></li>
+      <li><%= result[0].rating2 %></li>
+      <li><%= result[0].address2 %></li>
     </ul>
+  </div>
 
-    <h3><%= JSON.stringify(result[0].restaurant3)%></h3>
+  <div class="col-sm-4">
+    <h3><%= result[0].restaurant3 %></h3>
       <ul>
-        <li><%= JSON.stringify(result[0].rating3)%></li>
-        <li><%= JSON.stringify(result[0].address3)%></li>
+        <li><%= result[0].rating3 %></li>
+        <li><%= result[0].address3%></li>
     </ul>
+  </div>
 </body>
 
 <br><br><br>
