@@ -5,8 +5,11 @@ const bodyParser=require('body-parser');
 const yelp = require('yelp-fusion');
 const passport = require('passport');
 const mongoose = require('mongoose');
-var Strategy = require('passport-twitter').Strategy;
 
+var FacebookStrategy = require('passport-facebook').Strategy;
+app.use(require('express-session')({secret: 'verysecret', resave: true, saveUninitialized: true}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 //This is the block of code that enables us to connect mongoose to our database
 //We're using the built-in .connect method and the URL given from MLAB (which is a free mongoDB database)
@@ -18,17 +21,7 @@ var db = mongoose.connection;
 //We will likely need multiple schemas (one for users, one for something else)
 var Schema = mongoose.Schema;
 
-/*J and I made this schema to fit the assignment, so store the API result from
-Yelp based on the search term and location.  That way, when a user searches for
-a term/location (i.e "donuts, Seattle"), if in our database, the queryterm "donuts"
-and the querlocation "Seattle" already exists, we just return the results.
-If queryterm/querylocation doesn't exist in our database, then we know that
-it doesn't exist => make an API call, give the user the results, and then store
-these queryterm/querylocation in our database, so the NEXT time someone searches
-"Donuts, Seattle", instead of making that API call, we just return the results from
-the db.
-
-We parsed the API result to display the top 3 restaurants/bars that return what
+/*JWe parsed the API result to display the top 3 restaurants/bars that return what
 you're looking for, along with its average star rating and its address.
 */
 
@@ -55,8 +48,16 @@ var resultSchema = new Schema({
   price3: String
 });
 
-var result = mongoose.model('result', resultSchema);
+var userSchema = new Schema({
+  id: String,
+  fbtoken: String,
+  fbemail: String,
+  name: String,
+  photo: String
+});
 
+var result = mongoose.model('result', resultSchema);
+var User = mongoose.model('user', userSchema);
 /*Schemas can take a variety of data types, like Integers, String, Objects
 but we are held kind of contingent to the data types that Yelp API returns
 (i.e, Yelp returns the rating of each restaurant as a String, not an int)+
@@ -66,8 +67,6 @@ Strings seem to be the easiest as of now.
 /*LOGIN FOR TWITTER OAUTH PASSPORT */
 
 var keys = require('./config');
-
-//myKey for the API, secretKey for Yelp Secret, consumerKey for Twitter Oauth, secret for Twitter Oauth
 var myKey = keys.mykey;
 var secretKey= keys.secretkey;
 var myconsumerKey = keys.consumerKey;
@@ -75,38 +74,64 @@ var myconsumerSecret = keys.consumerSecret;
 var mygoogleKey = keys.googleKey;
 
 //Using the npm package of passport/twitter strategy to setup our Twitter oauth, base syntax (lifted & shifted)
-passport.use(new Strategy ({
-  consumerKey: myconsumerKey,
-  consumerSecret: myconsumerSecret,
-  callbackURL:'http://localhost:8000/'
-  //The callbackURL is what web page twitter redirects the user to after a successful login
-},
 
-//More lifting and shifting of the base package syntax, can't really explain well
-function(token, tokenSecret, profile, cb) {
-  console.log("user made it to this stage of function!");
-  return cb(null, profile);
+passport.use(new FacebookStrategy({
+  clientID: keys.fbAppId,
+  clientSecret: keys.fbAppSecret,
+  callbackURL: 'http://localhost:8000/login/facebook/callback',
+  profileFields: ['id', 'emails', 'name', 'photos', 'gender', 'about'],
+},
+function(token, refreshToken, profile, done) {
+  process.nextTick(function() {
+
+    console.log("PROFILE ID: " + profile.id);
+    console.log("PROFILE TOKEN: " + token);
+    console.log("PROFILE GIVEN NAME: " + profile.name.givenName + " " + profile.name.familyName);
+    console.log("PROFILE EMAILS: " + profile.emails[0].value);
+    console.log("PROFILE PHOTO: " + profile.photos[0].value);
+    console.log("GENDER: " + profile.gender);
+    console.log("AGE: " + profile.age);
+
+    db.collection("users").findOne({ 'id': profile.id}, function(err, user) {
+      if (err)
+        return done(err);
+     if (user) {
+       console.log("!!!USER ALREADY EXISTS IN DB!!!");
+       return done(null, user);
+     }
+     else {
+
+       console.log("***USER DOES NOT CURRENTLY EXIST IN DB***");
+
+       db.collection("users").insert({
+         id: profile.id,
+         fbtoken: token,
+         name: profile.name.givenName + " " + profile.name.familyName,
+         gender: profile.gender,
+         email: profile.emails[0].value,
+         photo: profile.photos[0].value
+       })
+          return done(null, user);
+     }
+   });
+ });
 }));
 
-//These are to serialize user sessions once they've logged in as users
-passport.serializeUser(function(user, cb) {
-  cb(null, user);
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
 });
 
-passport.deserializeUser(function(obj, cb) {
-  cb(null, obj);
+passport.deserializeUser(function (id, done) {
+  User.findById(id, function (err, user) {
+    done(err, user);
+  });
 });
-
-//More base syntax for the passport twitter package, can't explain well
-app.use(require('express-session')({secret: 'placeholder', resave: true, saveUninitialized:true}));
-
-'use strict';
 
 /*Authenticating our Yelp search, first using our stored Yelp keys + secret to retrieve our
 token, THEN after successfully obtaining our token, initialize ourselves as a "client" so we
 may use the Yelp API.
 */
-const token = yelp.accessToken(myKey, secretKey).then(response => {
+const yelptoken = yelp.accessToken(myKey, secretKey).then(response => {
   const client = yelp.client(response.jsonBody.access_token);
 
   console.log("App is up and running!");
@@ -126,47 +151,24 @@ const token = yelp.accessToken(myKey, secretKey).then(response => {
   app.use(passport.initialize());
   app.use(passport.session());
 
+    app.get("/login/facebook/callback", passport.authenticate('facebook',
+    {session: false,
+      failureRedirect: '/',
+      successRedirect: '/'
+    }));
+
   //Sets the page that links to the loginto twitter authentication page
-  app.get("/login/twitter",
-  passport.authenticate('twitter'));
-
-  //These are just my tests (Yishan)'s for embedded JS when we return data to front end
-  /*Just keeping these as a reference for if trying to understand how EJS works.  EJS
-  is essentially HTML with embedded JS, which enables us to take in dynamic data and do
-  cool stuff to it with HTML.  Otherwise, with just HTML, everything is static and there
-  would be no way AFAIK to pass our back-end data results to the front-end.
-  Visit /embeddedtest to see how it works.
-  */
-  app.get("/embeddedtest", function(req, res) {
-
-    var drinks = [
-      {name: "Blood Mary"},
-      {name: "Martini"},
-      {name: "Scotch"}
-    ];
-
-    //Using .render instead of .sendFile or .send because of static HTML constraints
-    res.render(__dirname + "/views/searchResult.ejs", {
-      drinks: drinks,
-    });
-  });
-
+  app.get("/login/facebook", passport.authenticate('facebook', {scope: 'email'}));
 
   //This is the back-end code for when the user clicks on the "Submit" button
   app.get("/yelpresult", function(req, res) {
 
     //Here, we're just console.logging in Terminal as a way of verifiying we're taking in the inputs correctly
-    console.log("SEARCH = " + req.query.search);
-    console.log("LOCATION = " + req.query.location);
-
     /*The way this logic here works is with a standard if, else.  First we're saying, go to our database in mongodb
     that we set up earlier, look up if the queryterm/querylocation already exist using the mongodb built-in Node
-    method of .find.
-    IF db.collection("results").find() returns nothing from our database, that means it DOESN'T EXIST => call the API result,
-    return those results to user, and then STORE them in the database.
-    ELSE if db.collection("results").find() returns something in our database, that means that that an entry exists already for
-    the search term/search location. Since the entry already exists, we just return the result from our database, no need for API call.
-    */
+    method of .find.*/
+    console.log("SEARCH = " + req.query.search);
+    console.log("LOCATION = " + req.query.location);
 
     db.collection("results").find( {queryterm: req.query.search, querylocation: req.query.location}).toArray(function(err, result) {
       if (result != "") {

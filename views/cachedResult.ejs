@@ -83,15 +83,12 @@ each of the data in their own bullet point.
         line-height: 30px;
         padding-left: 10px;
       }
-
       #right-panel select, #right-panel input {
         font-size: 15px;
       }
-
       #right-panel select {
         width: 100%;
       }
-
       #right-panel i {
         font-size: 12px;
       }
@@ -170,12 +167,10 @@ each of the data in their own bullet point.
           center: {lat: 42.361, lng: -71.105}
         });
         directionsDisplay.setMap(map);
-
         document.getElementById('submit').addEventListener('click', function() {
           calculateAndDisplayRoute(directionsService, directionsDisplay);
         });
       }
-
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         var waypts = [];
         var checkboxArray = document.getElementById('waypoints');
@@ -187,7 +182,6 @@ each of the data in their own bullet point.
             });
           }
         }
-
         directionsService.route({
           origin: document.getElementById('start').value,
           destination: document.getElementById('end').value,
