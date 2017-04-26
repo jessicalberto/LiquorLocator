@@ -8,9 +8,6 @@ Our website application will be any college kid’s ideal, all-inclusive app for
 Notes: 
 master branch -- final demonstration development <br/>
 APIbranch -- API developer branch <br/>
-flaskExample -- Data developer branch <br/>
-  --> to run flaskExample
-  --> requirements.txt coming soon~ 
-  --> start mongo: sudo mongod
-  --> python2 run2.py
+
+
 

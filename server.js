@@ -279,3 +279,29 @@ const yelptoken = yelp.accessToken(myKey, secretKey).then(response => {
   });
 
 });
+
+app.get("/buzzed", function(req, res) {
+
+  res.render(__dirname + "/views/drunk_level/buzzed.ejs");
+
+ });
+
+
+app.get("/tipsy", function(req, res) {
+
+  res.render(__dirname + "/views/drunk_level/tipsy.ejs");
+
+ });
+
+
+app.get("/drunk", function(req, res) {
+
+  res.render(__dirname + "/views/drunk_level/drunk.ejs");
+
+ });
+
+app.get("/hammered", function(req, res) {
+
+  res.render(__dirname + "/views/drunk_level/hammered.ejs");
+
+ });

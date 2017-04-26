@@ -123,10 +123,19 @@ function w3_close() {
 <br>
 <h3>How drunk are you looking to get tonight?</h3><br>
 <div class="drunkstages">
-  <button class ="btn btn-lg btn-primary" ng-mouseover="hoverBuzzed()" ng-mouseleave="hoverOutBuzzed()">Buzzed</button>
-  <button class ="btn btn-lg btn-info" ng-mouseover="hoverTipsy()" ng-mouseleave="hoverOutTipsy()">Tipsy</button>
-  <button class="btn btn-lg btn-warning" ng-mouseover="hoverDrunk()" ng-mouseleave="hoverOutDrunk()">Drunk</button>
-  <button class ="btn btn-lg btn-danger" ng-mouseover ="hoverHammered()" ng-mouseleave="hoverOutHammered()">Hammered</button>
+  <form action = "/buzzed" method = GET">
+    <button class ="btn btn-lg btn-primary" ng-mouseover="hoverBuzzed()" ng-mouseleave="hoverOutBuzzed()" input type = "submit" value = "submit">Buzzed</button>
+  </form> 
+  <form action = "/tipsy" method = GET">
+    <button class ="btn btn-lg btn-info" ng-mouseover="hoverTipsy()" ng-mouseleave="hoverOutTipsy()" input type = "submit" value = "submit">Tipsy</button>
+  </form>
+  <form action = "/drunk" method = GET">
+    <button class="btn btn-lg btn-warning" ng-mouseover="hoverDrunk()" ng-mouseleave="hoverOutDrunk()" input type = "submit" value = "submit">Drunk</button>
+  </form>
+  <form action = "/hammered" method = GET">
+    <button class ="btn btn-lg btn-danger" ng-mouseover ="hoverHammered()" ng-mouseleave="hoverOutHammered()" input type = "submit" value = "submit">Hammered</button>
+  </form>
+   
 <!--block of messages for the hover-over text descriptions of the stages of drunkedness -->
 
   <span ng-show="hoverBuzzedmsg"><h3>JUST A WARM FUZZY FEELING AND SLIGHTLY CHATTIER</h3></a></span>
