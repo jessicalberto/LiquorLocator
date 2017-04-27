@@ -121,6 +121,9 @@ function w3_close() {
     <center>
       <font face="Century Gothic"><h3> Let's start off simple.</h3></font>
     </center>
+
+
+
     <style type="text/css">
     #wrap {
       width:800px;
@@ -142,24 +145,30 @@ function w3_close() {
     <div id="wrap">
       <div id="left_col">
         <h3>How drunk are you looking to get tonight?</h3><br>
+
+        <h1><%= buzzedurl %></h1>
+        <h1><%= tipsyurl %></h1>
+        <h1><%= drunkurl %></h1>
+        <h1><%= hammeredurl %></h1>
+
         <div class="drunkstages">
           <div id = "p">
-            <form action = "/buzzed" method = GET">
+            <form method = "GET" action = <%=buzzedurl%>>
               <button class ="btn btn-lg btn-primary" ng-mouseover="hoverBuzzed()" ng-mouseleave="hoverOutBuzzed()" input type = "submit" value = "submit">Buzzed</button>
             </form>
           </div>
           <div id = "p">
-            <form action = "/tipsy" method = GET">
+            <form method = "GET" action = <%=tipsyurl%>>
               <button class ="btn btn-lg btn-info" ng-mouseover="hoverTipsy()" ng-mouseleave="hoverOutTipsy()" input type = "submit" value = "submit">Tipsy</button>
             </form>
           </div>
           <div id = "p">
-            <form action = "/drunk" method = GET">
+            <form method = "GET" action = <%=drunkurl%>>
               <button class="btn btn-lg btn-warning" ng-mouseover="hoverDrunk()" ng-mouseleave="hoverOutDrunk()" input type = "submit" value = "submit">Drunk</button>
             </form>
           </div>
           <div id = "p">
-            <form action = "/hammered" method = GET">
+            <form method = "GET" action= <%=hammeredurl%>>
               <button class ="btn btn-lg btn-danger" ng-mouseover ="hoverHammered()" ng-mouseleave="hoverOutHammered()" input type = "submit" value = "submit">Hammered</button>
             </form>
           </div>

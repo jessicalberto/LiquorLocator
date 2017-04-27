@@ -186,7 +186,19 @@ const yelptoken = yelp.accessToken(myKey, secretKey).then(response => {
       userphoto = result[0].photo;
     });
 
-    res.render(__dirname + "/views/homeUser.ejs", {userfullname, usergender, useremail, userphoto});
+    var buzzedurl = "/buzzed" + usergender;
+    console.log("buzzed URL = " + buzzedurl);
+
+    var tipsyurl = "/tipsy" + usergender;
+    console.log("tispy URL = " + tipsyurl);
+
+    var drunkurl = "/drunk" + usergender;
+    console.log("drunk URL = " + drunkurl);
+
+    var hammeredurl = "/hammered" + usergender;
+    console.log("hammered URL = " + hammeredurl);
+
+    res.render(__dirname + "/views/homeUser.ejs", {userfullname, usergender, useremail, userphoto, buzzedurl, tipsyurl, drunkurl, hammeredurl});
 
   });
 
@@ -309,26 +321,30 @@ const yelptoken = yelp.accessToken(myKey, secretKey).then(response => {
 
 // Render button ridirect pages for buzzed, tipsy, drunk, and hammered.
 
-app.get("/buzzed", function(req, res) {
-
-  res.render(__dirname + "/views/drunk_level/buzzed.ejs");
-
+app.get("/buzzedmale", function(req, res) {
+  res.render(__dirname + "/views/drunk_level/buzzedmale.ejs");
  });
+ app.get("/buzzedfemale", function(req, res) {
+   res.render(__dirname + "/views/drunk_level/buzzedFemale.ejs");
+ })
 
-app.get("/tipsy", function(req, res) {
-
-  res.render(__dirname + "/views/drunk_level/tipsy.ejs");
-
+app.get("/tipsymale", function(req, res) {
+  res.render(__dirname + "/views/drunk_level/tipsyMale.ejs");
  });
+ app.get("/tipsyfemale", function(req, res) {
+   res.render(__dirname + "/views/drunk_level/tipsyFemale.ejs");
+  });
 
-app.get("/drunk", function(req, res) {
-
-  res.render(__dirname + "/views/drunk_level/drunk.ejs");
-
+app.get("/drunkmale", function(req, res) {
+  res.render(__dirname + "/views/drunk_level/drunkMale.ejs");
  });
+ app.get("/drunkfemale", function(req, res) {
+   res.render(__dirname + "/views/drunk_level/drunkFemale.ejs");
+});
 
-app.get("/hammered", function(req, res) {
-
-  res.render(__dirname + "/views/drunk_level/hammered.ejs");
-
+app.get("/hammeredmale", function(req, res) {
+  res.render(__dirname + "/views/drunk_level/hammeredMale.ejs");
  });
+ app.get("/hammeredfemale", function(req, res) {
+   res.render(__dirname + "/views/drunk_level/hammeredFemale.ejs");
+});
