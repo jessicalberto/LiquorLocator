@@ -154,11 +154,20 @@ const yelptoken = yelp.accessToken(myKey, secretKey).then(response => {
     app.get("/login/facebook/callback", passport.authenticate('facebook',
     {session: false,
       failureRedirect: '/',
-      successRedirect: '/'
+      successRedirect: '/successful_login'
     }));
 
   //Sets the page that links to the loginto twitter authentication page
   app.get("/login/facebook", passport.authenticate('facebook', {scope: 'email'}));
+
+
+ //Sets the redirect, // Pass in Facebook information to redirect page
+  app.get("/successful_login", function(req, res) {
+    console.log("Successful user log in");
+    res.render(__dirname + "/views/homeUser.ejs");
+
+  });
+
 
   //This is the back-end code for when the user clicks on the "Submit" button
   app.get("/yelpresult", function(req, res) {
@@ -263,6 +272,7 @@ const yelptoken = yelp.accessToken(myKey, secretKey).then(response => {
           //them on the front end
           res.render(__dirname + "/views/searchResult.ejs", { result1,rate1,location1, image1,priceRange1,result2,rate2,location2,image2,priceRange2,result3,rate3,location3, image3,priceRange3});
 
+
           //Currently not doing anything with reviews, this is just a block of code just to play around with,
           //but it currently doesn't do anything.
           client.reviews(biz_id).then (response => {
@@ -280,19 +290,19 @@ const yelptoken = yelp.accessToken(myKey, secretKey).then(response => {
 
 });
 
+// Render button ridirect pages for buzzed, tipsy, drunk, and hammered. 
+
 app.get("/buzzed", function(req, res) {
 
   res.render(__dirname + "/views/drunk_level/buzzed.ejs");
 
  });
 
-
 app.get("/tipsy", function(req, res) {
 
   res.render(__dirname + "/views/drunk_level/tipsy.ejs");
 
  });
-
 
 app.get("/drunk", function(req, res) {
 
