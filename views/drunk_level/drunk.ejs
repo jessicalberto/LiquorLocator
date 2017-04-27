@@ -1,32 +1,132 @@
+<head>
+  <html lang = "en-US">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+</head>
+
+<body id="body">
+    <nav class="navbar navbar-default" id="navColour">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a id="clr" class="navbar-brand" href="#">The Liquor Locator</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav" >
+                    <li id="clr" ><a href="#">Home</a></li>
+                    <li id="clr" class="active"><a href="#">Drink Selector</a></li>
+                    <li id="clr"><a href="#">Bar Crawl</a></li>
+                    <li id="clr"><a href="#">My History</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</body>
+
 <center>
 <a href="http://s347.photobucket.com/user/shawtyjesshhicuhh/media/UnJIsXuL_zpsxpj4fwd9.gif.html" target="_blank"><img src="http://i347.photobucket.com/albums/p449/shawtyjesshhicuhh/UnJIsXuL_zpsxpj4fwd9.gif" border="0" alt=" photo UnJIsXuL_zpsxpj4fwd9.gif"/></a>
 </center><br>
 
 <center>
 <h2> So you wanna get <FONT COLOR="#000080">Drunk</FONT>... huh? </h2><br>
+
+Tell us a little bit more about you.
+
+<div>
+<style>
+  .bordered {
+    width: 410px;
+    height: 500px;
+    padding: 10px;
+    border: 2px solid black;
+  }
+</style>
+<body>
+<br>
+  <div class="bordered">
+  <h4>
+      <h5>How much do you weigh?</h5>
+      <input type="number" ng-model="userweight" placeholder="100,150,200...">  pounds <br>
+
+      <h5>How tall are you?</h5>
+      <input type="number" ng-model="userheight" placeholder="5.5 = 5 foot, 6 inches">  feet <br>
+
+      <h5>What gender are you?</h5>
+      <form action="">
+        <input type="radio" name="gender" value="male"> Male<br>
+        <input type="radio" name="gender" value="female"> Female<br>
+      </form>
+    </body>
+  </div>
+<br>
+<button class = "btn btn-lg btn-primary" input type="submit" value = "submit">Calculate</button>
+
+<br>
 <h3> According to your measurements below, </h3><br>
 
 Your height: <br>
 Your weight: <br>
+Your Gender: <br>
 
-<h3> You should drink... </h3><br>
+<h3> You should ...<br> <br>Have a beer or two. <br>
+Or some wine.</h3> <br>
 
-INSERT RESULT HERE
 
+<center> 
 
+The ideal Blood Alcohol Concentration (BAC) for an optimal drunk is 0.11% to 0.18%.  <br>To reach a BAC of 0.11% to 0.18%., you must know how many drinks you need to consume given your sex and weight.<br>  Read more to see a chart provides an estimate of the number of drinks needed to reach the 0.11% to 0.18% BAC range for <br>drinkers who have not developed tolerance. <a href="http://www.hbcprotocols.com/anti-alcohol/perfectbuzz.html">Read more...</a><br><br>
+
+<div style="width:900px;height:600px;overflow:scroll;padding:5px; border:4px double #000080;">
+<center>
+
+<style type="text/css">
+#wrap {
+   width:800px;
+   margin:0 auto;
+}
+#left_col {
+   float:left;
+   width:300px;
+}
+#right_col {
+   float:right;
+   width:300px;
+}
+</style>
+<div id="wrap">
+    <div id="left_col">
+    <img src="http://dispatchist.com/wp-content/uploads/2015/05/beers.jpg" border="0" alt=" photo yelp3.jpg" width="330" height="170"/>
+    <h3><FONT COLOR="#ff0000"><b> 2 </b></FONT> <FONT COLOR="#000080"> Beers (~12 oz.) </FONT> </h3>
+     There are numerous types of beer out there for - all cold and ready to give you a nice buzz. Beer is typically relatively low in alcohol content, around 4-6%. This is great because it reduces the risk that alcohol will sneak up on you and leave you drunk beyond repair. Whether you or your friends are enjoying a pint at the local bar or shotgunning at a house party, beer is a very social drink. Best of all, it won’t get you too drunk if you are casually sipping, so that you won’t make a fool out of yourself (at least, not because of alcohol).
+    <a href="http://berghoffbeer.com/blog/9-reasons-why-people-like-beer-so-much/">Read more...</a>
+    </div>
+    <div id="right_col">
+        <img src="http://nationalmargaritaday.com/wp-content/uploads/2015/02/tequila-health-benefits.jpg" border="0" alt=" photo yelp3.jpg" width="300" height="300""/></a><br><br>
+         <h3> <FONT COLOR="#ff0000"><b> 2 </b></FONT> <FONT COLOR="#000080">Shots of Tequila </FONT> </h3>
+        Of course, of course it’s impossible to compose such ranking without this classics. Being called “the moment of happiness between the salt and the lemon,” tequila is widely considered as one of the best party drinks. It is usually associated with the concept that whoever consumes it, had gone out to have real fun and kick his liver around tonight. Regardless of the many versions of tequila varying in taste and alcohol content, it remains one of the fastest way to get drunk.
+    </div>
+</div>
+
+</center>
+</div>
 
 
 <center>
 
-<br>
-  <h3>Now, search for places in your area that offer this drink.</h3><br/>
+<br><br><br><br><br> 
+<br><br><br><br><br>
+
+
+
+  <h3>Now, search for places in your area that offers your poison.</h3><br/>
 
 
 <div ng-app="myApp" ng-controller="myAppCtrl">
 <style>
   .bordered {
-    width: 400px;
-    height: 175px;
+    width: 410px;
+    height: 205px;
     padding: 10px;
     border: 2px solid black;
   }
@@ -36,12 +136,19 @@ INSERT RESULT HERE
   <div class="bordered">
   <h4>
     <form action="/yelpresult" method="GET">
-    <h3>Let the night begin.</h3>
-      I'm looking for: <input type = "text" placeholder="bourbon, tequila..." name="search"><br><br>
-      Location: <input type="text" placeholder="boston, sf, seattle..." name="location"><br><br>
+    <h4><b><FONT FACE="Lucida Bright">Let the night begin.</FONT></b></h4>
+      I'm looking for: <input type = "text" placeholder="jagermeister, tequila..." name="search"><br><br>
+      Location: <input type="text" placeholder="boston, cambridge, brookline..." name="location"><br><br>
       <button class = "btn btn-info btn-lg" input type="submit" value = "submit">Submit</button>
     </form>
     </div>
 <br>
 
 </center>
+
+
+
+
+<br><br><br>
+
+<center> Created by Group 7 <br>CS411 Software Engineering - Spring 2017 <br> Boston University</center>

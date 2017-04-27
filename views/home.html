@@ -29,8 +29,8 @@ We likely won't do height, mostly weight and gender, so that's something to keep
             <div>
                 <ul class="nav navbar-nav" >
                     <li id="clr" class="active"><a href="#">Home</a></li>
-                    <li id="clr"><a href="#">Drinks</a></li>
-                    <li id="clr"><a href="#">Location Search</a></li>
+                    <li id="clr"><a href="#">Drink Selector</a></li>
+                    <li id="clr"><a href="#">Bar Crawl</a></li>
                     <li id="clr"><a href="#">My History</a></li>
                 </ul>
             </div>
@@ -105,45 +105,88 @@ function w3_close() {
 </style>
 <body>
 <center>
-  <font face="Century Gothic"><h1>Team 7 Drinking App</h1></font>
+  <font face="Century Gothic"><h3> A BU kid’s ideal, all-inclusive app for a night out.</h3></font>
   <h3><i class="em em-8ball"></i><i class="em em-kissing_closed_eyes"></i><i class="em em-see_no_evil"></i></h3>
   <br>
   <a href="http://localhost:8000/login/facebook"><img src="http://www.freeiconspng.com/uploads/facebook-login-button-png-11.png" height="100"></a>
   <br>
   You have not logged in yet.
 <br>
-  <h3>Search for local places that offer your favorite drinks.</h3><br/>
-  <div class="bordered">
-  <h4>
-    <form action="/yelpresult" method="GET">
-      I'm looking for: <input type = "text" placeholder="bourbon, tequila..." name="search"><br><br>
-      Location: <input type="text" placeholder="boston, sf, seattle..." name="location"><br><br>
-      <button class = "btn btn-info btn-lg" input type="submit" value = "submit">Submit</button>
-    </form>
-    </div>
 <br>
-<h3>How drunk are you looking to get tonight?</h3><br>
-<div class="drunkstages">
-  <form action = "/buzzed" method = GET">
-    <button class ="btn btn-lg btn-primary" ng-mouseover="hoverBuzzed()" ng-mouseleave="hoverOutBuzzed()" input type = "submit" value = "submit">Buzzed</button>
-  </form> 
-  <form action = "/tipsy" method = GET">
-    <button class ="btn btn-lg btn-info" ng-mouseover="hoverTipsy()" ng-mouseleave="hoverOutTipsy()" input type = "submit" value = "submit">Tipsy</button>
-  </form>
-  <form action = "/drunk" method = GET">
-    <button class="btn btn-lg btn-warning" ng-mouseover="hoverDrunk()" ng-mouseleave="hoverOutDrunk()" input type = "submit" value = "submit">Drunk</button>
-  </form>
-  <form action = "/hammered" method = GET">
-    <button class ="btn btn-lg btn-danger" ng-mouseover ="hoverHammered()" ng-mouseleave="hoverOutHammered()" input type = "submit" value = "submit">Hammered</button>
-  </form>
+<br>
+<center>
+<font face="Century Gothic"><h3> Let's start off simple.</h3></font>
+</center>
+<style type="text/css">
+#wrap {
+   width:800px;
+   margin:0 auto;
+}
+#left_col {
+   float:left;
+   width:300px;
+}
+#right_col {
+   float:right;
+   width:300px;
+}
 
-<!--block of messages for the hover-over text descriptions of the stages of drunkedness -->
+#p {
+    display: inline-block;
+}
+</style>
+<div id="wrap">
+    <div id="left_col">
+        <h3>How drunk are you looking to get tonight?</h3><br>
+        <div class="drunkstages">
+        <div id = "p">
+          <form action = "/buzzed" method = GET">
+            <button class ="btn btn-lg btn-primary" ng-mouseover="hoverBuzzed()" ng-mouseleave="hoverOutBuzzed()" input type = "submit" value = "submit">Buzzed</button>
+          </form> 
+        </div>
+        <div id = "p">
+          <form action = "/tipsy" method = GET">
+            <button class ="btn btn-lg btn-info" ng-mouseover="hoverTipsy()" ng-mouseleave="hoverOutTipsy()" input type = "submit" value = "submit">Tipsy</button>
+          </form>
+          </div>
+         <div id = "p"> 
+          <form action = "/drunk" method = GET">
+            <button class="btn btn-lg btn-warning" ng-mouseover="hoverDrunk()" ng-mouseleave="hoverOutDrunk()" input type = "submit" value = "submit">Drunk</button>
+          </form>
+          </div>
+        <div id = "p">
+          <form action = "/hammered" method = GET">
+            <button class ="btn btn-lg btn-danger" ng-mouseover ="hoverHammered()" ng-mouseleave="hoverOutHammered()" input type = "submit" value = "submit">Hammered</button>
+          </form>
+        </div>
+        <!--block of messages for the hover-over text descriptions of the stages of drunkedness -->
 
-  <span ng-show="hoverBuzzedmsg"><h3>JUST A WARM FUZZY FEELING AND SLIGHTLY CHATTIER</h3></a></span>
-  <span ng-show="hoverTipsymsg"><h3>GETTING A LITTLE TOO CHATTY</h3></span>
-  <span ng-show="hoverDrunkmsg"><h3>YOU'RE DRUNK</h3></span>
-  <span ng-show="hoverHammeredmsg"><h3>TOTALLY WASTED</h3><img src="http://i347.photobucket.com/albums/p449/shawtyjesshhicuhh/totally%20wasted_zpsiaqjmpe5.gif" border="0" alt=" photo totally wasted_zpsiaqjmpe5.gif"/></span>
+          <span ng-show="hoverBuzzedmsg"><h3>Just a nice, warm fuzzy feeling.</h3></a></span>
+          <span ng-show="hoverTipsymsg"><h3>Things aren't spinning yet but you still feel good.</h3></span>
+          <span ng-show="hoverDrunkmsg"><h3>You might be falling all over the place, soon.</h3></span>
+          <span ng-show="hoverHammeredmsg"><h3>TOTALLY WASTED</h3><img src="http://i347.photobucket.com/albums/p449/shawtyjesshhicuhh/totally%20wasted_zpsiaqjmpe5.gif" border="0" alt=" photo totally wasted_zpsiaqjmpe5.gif"/></span>
+        </div>
+
+    </div>
+    <div id="right_col">
+        <center><h3>Search for local places that offer your favorite drinks.</h3><br/></center>
+        <div class="bordered">
+        <h4>
+          <form action="/yelpresult" method="GET">
+            I'm looking for: <input type = "text" placeholder="bourbon, tequila..." name="search"><br><br>
+            Location: <input type="text" placeholder="boston, sf, seattle..." name="location"><br><br>
+            <button class = "btn btn-info btn-lg" input type="submit" value = "submit">Submit</button>
+          </form>
+          </div>
+    </div>
 </div>
+
+<br>
+<br><br><br><br><br> 
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
 
 <br><br><br>
 
@@ -160,8 +203,8 @@ function w3_close() {
 </body>
 </div>
 
-<br><br><br><br><br><br><br>
+<br><br><br><br>
 
 <center> Created by Group 7 <br>CS411 Software Engineering - Spring 2017 <br> Boston University</center>
 
-<br><br><br><br><br><br><br><br><br><br>
+<br><br><br>
