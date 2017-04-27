@@ -18,8 +18,6 @@ We likely won't do height, mostly weight and gender, so that's something to keep
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 </head>
-
-<br>
 <title>The Liquor Locator.</title>
 
 <body id="body">
@@ -33,7 +31,7 @@ We likely won't do height, mostly weight and gender, so that's something to keep
           <li id="clr" class="active"><a href="#">Home</a></li>
           <li id="clr"><a href="#">Drinks</a></li>
           <li id="clr"><a href="#">Location Search</a></li>
-          <li id="clr"><a href="#">My History</a></li>
+          <li id="clr"><a href="">Current User: <img src="<%= userphoto %>" class="img-circle" width="25" height="25" text ="right"> <%= userfullname %></a></li>
         </ul>
       </div>
     </div>
@@ -110,14 +108,16 @@ function w3_close() {
     <font face="Century Gothic"><h3> A BU kid’s ideal, all-inclusive app for a night out.</h3></font>
     <h3><i class="em em-8ball"></i><i class="em em-kissing_closed_eyes"></i><i class="em em-see_no_evil"></i></h3>
 
-    <h3>You're logged in!</h3>
-    <br>Your User info:<br>
-    <img src= "<%= userphoto %>">
-    <h4>Name:  <%= userfullname %></h4>
-    <h4>Gender: <%= usergender %></h4>
-    <h4>Email: <%= useremail %></h4>
+<h3>Welcome, <img src="<%= userphoto %>" class="img-circle">   <%= userfullname %>! </h3>
+  <div class="bordered" height = "100" width = "100">
+    <h4>Your User Info:</h4>    <img src="http://icons.iconarchive.com/icons/custom-icon-design/silky-line-user/256/user-info-icon.png" border="0" width="30" height = "30"/><br>
+    <h5>Name:  <%= userfullname %></h5>
+    <h5>Gender: <%= usergender %></h5>
+    <h5>Email: <%= useremail %></h5>
+    
+  </div>
 
-    <br><br><br>
+    <br>
     <center>
       <font face="Century Gothic"><h3> Let's start off simple.</h3></font>
     </center>
@@ -145,11 +145,6 @@ function w3_close() {
     <div id="wrap">
       <div id="left_col">
         <h3>How drunk are you looking to get tonight?</h3><br>
-
-        <h1><%= buzzedurl %></h1>
-        <h1><%= tipsyurl %></h1>
-        <h1><%= drunkurl %></h1>
-        <h1><%= hammeredurl %></h1>
 
         <div class="drunkstages">
           <div id = "p">
