@@ -6,6 +6,7 @@ const yelp = require('yelp-fusion');
 const passport = require('passport');
 const mongoose = require('mongoose');
 
+var useridpass = "";
 var FacebookStrategy = require('passport-facebook').Strategy;
 app.use(require('express-session')({secret: 'verysecret', resave: true, saveUninitialized: true}));
 app.use(passport.initialize());
@@ -92,6 +93,8 @@ function(token, refreshToken, profile, done) {
     console.log("GENDER: " + profile.gender);
     console.log("AGE: " + profile.age);
 
+    useridpass = profile.id;
+
     db.collection("users").findOne({ 'id': profile.id}, function(err, user) {
       if (err)
         return done(err);
@@ -159,23 +162,37 @@ const yelptoken = yelp.accessToken(myKey, secretKey).then(response => {
 
   //Sets the page that links to the loginto twitter authentication page
   app.get("/login/facebook", passport.authenticate('facebook', {scope: 'email'}));
-
-
  //Sets the redirect, // Pass in Facebook information to redirect page
+
+ var userfullname;
+ var usergender;
+ var useremail;
+ var userphoto;
+
   app.get("/successful_login", function(req, res) {
     console.log("Successful user log in");
-    res.render(__dirname + "/views/homeUser.ejs");
+
+    console.log("user id = " + useridpass);
+
+    db.collection("users").find( {id: useridpass}).toArray(function(err, result) {
+      console.log("result after searching for " + useridpass + ": " + JSON.stringify(result));
+      console.log("NAME: " + JSON.stringify(result[0].name));
+      userfullname = result[0].name;
+      console.log("GENDER: "+ JSON.stringify(result[0].gender));
+      usergender = result[0].gender;
+      console.log("EMAIL: " + JSON.stringify(result[0].email));
+      useremail = result[0].email;
+      console.log("PHOTO: " + JSON.stringify(result[0].photo));
+      userphoto = result[0].photo;
+    });
+
+    res.render(__dirname + "/views/homeUser.ejs", {userfullname, usergender, useremail, userphoto});
 
   });
-
 
   //This is the back-end code for when the user clicks on the "Submit" button
   app.get("/yelpresult", function(req, res) {
 
-    //Here, we're just console.logging in Terminal as a way of verifiying we're taking in the inputs correctly
-    /*The way this logic here works is with a standard if, else.  First we're saying, go to our database in mongodb
-    that we set up earlier, look up if the queryterm/querylocation already exist using the mongodb built-in Node
-    method of .find.*/
     console.log("SEARCH = " + req.query.search);
     console.log("LOCATION = " + req.query.location);
 
@@ -290,7 +307,7 @@ const yelptoken = yelp.accessToken(myKey, secretKey).then(response => {
 
 });
 
-// Render button ridirect pages for buzzed, tipsy, drunk, and hammered. 
+// Render button ridirect pages for buzzed, tipsy, drunk, and hammered.
 
 app.get("/buzzed", function(req, res) {
 
