@@ -7,6 +7,10 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 
 var useridpass = "";
+var mainusername = "";
+var mainuserphoto = "";
+var mainusergender = "";
+var mainuseremail = "";
 var FacebookStrategy = require('passport-facebook').Strategy;
 app.use(require('express-session')({secret: 'verysecret', resave: true, saveUninitialized: true}));
 app.use(passport.initialize());
@@ -84,6 +88,11 @@ passport.use(new FacebookStrategy({
 },
 function(token, refreshToken, profile, done) {
   process.nextTick(function() {
+
+    mainusername = profile.name.givenName + " " + profile.name.familyName;
+    mainuserphoto = profile.photos[0].value;
+    mainusergender = profile.gender;
+    mainuseremail = profile.emails[0].value;
 
     console.log("PROFILE ID: " + profile.id);
     console.log("PROFILE TOKEN: " + token);
@@ -325,7 +334,7 @@ app.get("/buzzedmale", function(req, res) {
   res.render(__dirname + "/views/drunk_level/buzzedmale.ejs");
  });
  app.get("/buzzedfemale", function(req, res) {
-   res.render(__dirname + "/views/drunk_level/buzzedFemale.ejs");
+   res.render(__dirname + "/views/drunk_level/buzzedFemale.ejs", {mainusername, mainuserphoto, mainusergender, mainuseremail});
  })
 
 app.get("/tipsymale", function(req, res) {
