@@ -6,46 +6,43 @@ const yelp = require('yelp-fusion');
 const passport = require('passport');
 const mongoose = require('mongoose');
 
+//These are global variables that we initialize here,to later pass to each of the profiles to maintain session information as user acccesses different functions of the website.
 var useridpass = "";
 var mainusername = "";
 var mainuserphoto = "";
 var mainusergender = "";
 var mainuseremail = "";
+
+//This is init for Facebook Passport package to enable Facebook oauth.
 var FacebookStrategy = require('passport-facebook').Strategy;
 app.use(require('express-session')({secret: 'verysecret', resave: true, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-//This is the block of code that enables us to connect mongoose to our database
-//We're using the built-in .connect method and the URL given from MLAB (which is a free mongoDB database)
-//URL was provided by Mlab, but in short, just username + password + everything else
+//This is init for Mongoose DB, connecting with Mlabs via URL.
 mongoose.connect('mongodb://yishan:dosequis@ds161029.mlab.com:61029/usersweightdrink')
 var db = mongoose.connection;
 
-//This sets our "schema", which is how we're setting up the table
-//We will likely need multiple schemas (one for users, one for something else)
+//Linking a core schema with our mongoose db.
 var Schema = mongoose.Schema;
 
-/*JWe parsed the API result to display the top 3 restaurants/bars that return what
-you're looking for, along with its average star rating and its address.
-*/
-
+//The schema for Yelp API results, storing the query and all results (restaurants, photos, ratings, address).
 var resultSchema = new Schema({
   queryterm: String,
   querylocation: String,
-  //Restaurant 1
+  //Restaurant/Bar 1
   restaurant1: String,
   rating1: String,
   address1: String,
   photo1: String,
   price1: String,
-  //Restaurant 2
+  //Restaurant/Bar 2
   restaurant2: String,
   rating2: String,
   address2: String,
   photo2: String,
   price2: String,
-  //Restaurant 3
+  //Restaurant/Bar 3
   restaurant3: String,
   rating3: String,
   address3: String,
@@ -53,6 +50,7 @@ var resultSchema = new Schema({
   price3: String
 });
 
+//Schema for storing our user information, coming from FB Passport oauth
 var userSchema = new Schema({
   id: String,
   fbtoken: String,
@@ -61,16 +59,11 @@ var userSchema = new Schema({
   photo: String
 });
 
+//Storing each of the models into an accessible, easy to write var
 var result = mongoose.model('result', resultSchema);
 var User = mongoose.model('user', userSchema);
-/*Schemas can take a variety of data types, like Integers, String, Objects
-but we are held kind of contingent to the data types that Yelp API returns
-(i.e, Yelp returns the rating of each restaurant as a String, not an int)+
-Strings seem to be the easiest as of now.
-*/
 
-/*LOGIN FOR TWITTER OAUTH PASSPORT */
-
+//Accessing our config keys
 var keys = require('./config');
 var myKey = keys.mykey;
 var secretKey= keys.secretkey;
@@ -78,43 +71,46 @@ var myconsumerKey = keys.consumerKey;
 var myconsumerSecret = keys.consumerSecret;
 var mygoogleKey = keys.googleKey;
 
-//Using the npm package of passport/twitter strategy to setup our Twitter oauth, base syntax (lifted & shifted)
-
+//Base syntax for FB Strategy/Passport oauth
 passport.use(new FacebookStrategy({
   clientID: keys.fbAppId,
   clientSecret: keys.fbAppSecret,
   callbackURL: 'http://localhost:8000/login/facebook/callback',
-  profileFields: ['id', 'emails', 'name', 'photos', 'gender', 'about'],
+  profileFields: ['id', 'emails', 'name', 'photos', 'gender', 'about'], //parameters we're accessing for each FB login
 },
 function(token, refreshToken, profile, done) {
   process.nextTick(function() {
 
+//Initializing the global variables of username/userphoto/gender/email as persistent data across all functions in a session
     mainusername = profile.name.givenName + " " + profile.name.familyName;
     mainuserphoto = profile.photos[0].value;
     mainusergender = profile.gender;
     mainuseremail = profile.emails[0].value;
+    useridpass = profile.id;
 
+//This is debugging/ABP purposes, to ensure we're recieving everything correctly
     console.log("PROFILE ID: " + profile.id);
     console.log("PROFILE TOKEN: " + token);
-    console.log("PROFILE GIVEN NAME: " + profile.name.givenName + " " + profile.name.familyName);
+    console.log("PROFILE NAME: " + profile.name.givenName + " " + profile.name.familyName);
     console.log("PROFILE EMAILS: " + profile.emails[0].value);
     console.log("PROFILE PHOTO: " + profile.photos[0].value);
     console.log("GENDER: " + profile.gender);
     console.log("AGE: " + profile.age);
 
-    useridpass = profile.id;
-
+//In our database of users, look for someone with the profile.id, if exists, that means user already exists in db
     db.collection("users").findOne({ 'id': profile.id}, function(err, user) {
       if (err)
         return done(err);
      if (user) {
-       console.log("!!!USER ALREADY EXISTS IN DB!!!");
+       console.log("User already exists in database!");
        return done(null, user);
      }
      else {
 
-       console.log("***USER DOES NOT CURRENTLY EXIST IN DB***");
+//Otherwise, if there's no entry found in the user DB with the equivalent profile.id, that means it's a new user + time to store them in db
+       console.log("***User does not currently exist in database***");
 
+//Once confirmed not in database, then insert all parameters into database based on earlier userSchema
        db.collection("users").insert({
          id: profile.id,
          fbtoken: token,
@@ -129,6 +125,7 @@ function(token, refreshToken, profile, done) {
  });
 }));
 
+//Base syntax for serializing sessions upon login/logoff
 passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
@@ -141,8 +138,7 @@ passport.deserializeUser(function (id, done) {
 
 /*Authenticating our Yelp search, first using our stored Yelp keys + secret to retrieve our
 token, THEN after successfully obtaining our token, initialize ourselves as a "client" so we
-may use the Yelp API.
-*/
+may use the Yelp API.*/
 const yelptoken = yelp.accessToken(myKey, secretKey).then(response => {
   const client = yelp.client(response.jsonBody.access_token);
 
@@ -154,12 +150,13 @@ const yelptoken = yelp.accessToken(myKey, secretKey).then(response => {
   })
 
   //Sets the route for the home page, logs once in terminal msg, sendFiles of our home.html
+  //Simply renders the home page which forces user login before access to other functions
   app.get("/", function(req, res) {
     console.log("User requesting/landing on homepage.");
     res.sendFile(__dirname + "/views/home.html");
   });
 
-  //Initializes a session needed for our Twitter oauth
+  //Initializes a session needed for our FB oauth
   app.use(passport.initialize());
   app.use(passport.session());
 
@@ -178,23 +175,33 @@ const yelptoken = yelp.accessToken(myKey, secretKey).then(response => {
  var useremail;
  var userphoto;
 
+  //Routing to the home page upon successfully logging into the website, lets user access rest of functionality
   app.get("/successful_login", function(req, res) {
-    console.log("Successful user log in");
 
+    //ABP + logging to notify of successful log in
+    console.log("Successful user log in");
     console.log("user id = " + useridpass);
 
+    //Find the user in the database and then return/init the earlier global variables in order to populate user info box/maintain
+    //those details as persistent data in profile info box across all pages in a session
     db.collection("users").find( {id: useridpass}).toArray(function(err, result) {
+
+      //logs just to ensure correct matching of outputs
       console.log("result after searching for " + useridpass + ": " + JSON.stringify(result));
       console.log("NAME: " + JSON.stringify(result[0].name));
-      userfullname = result[0].name;
       console.log("GENDER: "+ JSON.stringify(result[0].gender));
-      usergender = result[0].gender;
       console.log("EMAIL: " + JSON.stringify(result[0].email));
-      useremail = result[0].email;
       console.log("PHOTO: " + JSON.stringify(result[0].photo));
+
+      //init variables with corresponding results
+      userfullname = result[0].name;
+      usergender = result[0].gender;
+      useremail = result[0].email;
       userphoto = result[0].photo;
     });
 
+    //based on one's gender, return them the stage of drunkness view that corresponds to their gender
+    //i.e, if male, return /buzzedmale for the buttons they click on, female returns /buzzedfemale for the buttons they click on
     var buzzedurl = "/buzzed" + usergender;
     console.log("buzzed URL = " + buzzedurl);
 
@@ -207,26 +214,33 @@ const yelptoken = yelp.accessToken(myKey, secretKey).then(response => {
     var hammeredurl = "/hammered" + usergender;
     console.log("hammered URL = " + hammeredurl);
 
+    //pass on all persistent data to the main homepage ejs in order to populate user info box + map correct gender-based URLs to the buttons
     res.render(__dirname + "/views/homeUser.ejs", {userfullname, usergender, useremail, userphoto, buzzedurl, tipsyurl, drunkurl, hammeredurl});
 
   });
 
-  //This is the back-end code for when the user clicks on the "Submit" button
+  //routing for when user uses the Yelp API search functionality upon click "Search" and entering in parameters
   app.get("/yelpresult", function(req, res) {
 
+    //logging user queries to ensure correct read-in via back-end
     console.log("SEARCH = " + req.query.search);
     console.log("LOCATION = " + req.query.location);
 
+    //Scan through our results collections db, if the query term && querylocation match the user's inputs, then we know an entry already exists
     db.collection("results").find( {queryterm: req.query.search, querylocation: req.query.location}).toArray(function(err, result) {
       if (result != "") {
-        console.log("Found!  An entry for THIS query already exists in database.");
+        console.log("Found!  An entry already exists in database.");
         res.render(__dirname + "/views/cachedResult.ejs", {result});
         console.log(result);
       }
 
       else {
 
-        console.log("IT DOESN'T EXIST!  CALLING YELP API");
+        /*Otherwise, if scan-through doesn't show any matching queryterms && querylocation
+        (i.e a search of "bourbon" in "new york" != "bourbon" in "boston"), then call the Yelp
+        API, search it, return results, and store those results in db
+        */
+        console.log("Doesn't exist!  Call the Yelp API + storing in db!");
 
         client.search({
           term: req.query.search,
@@ -273,11 +287,8 @@ const yelptoken = yelp.accessToken(myKey, secretKey).then(response => {
           /*This is the built-in method for inserting things into our database.  So since we
           have already parsed our results from the API result into its own variable, we can just
           push these/store these in the database based on our resultSchema from earlier.
-          MongoDB itself has collections and each collection is its own "database".  So eventually
-          we will likely have another db.collection but instead of db.collection("results"), it'd
-          probably hvae to be db.collection("users"), which will have a different schema based on what
-          we set earlier.
-          */
+          MongoDB itself has collections and each collection is its own "database". */
+
           db.collection("results").insert({
             // Restaurant 1
             queryterm: req.query.search,
@@ -304,19 +315,10 @@ const yelptoken = yelp.accessToken(myKey, secretKey).then(response => {
           });
 
           //Logging to confirm that the insertion in db is successful.
-          console.log("INSERT SUCCESSFUL");
+          console.log("Successfully stored new results into database!");
 
-          //Thus, render this new page, searchResult.ejs, and pass in all these data vars so that we may display
-          //them on the front end
+          //Thus, render this new page, searchResult.ejs, and pass in all these data vars so that we may display these vars on the front end
           res.render(__dirname + "/views/searchResult.ejs", { result1,rate1,location1, image1,priceRange1,result2,rate2,location2,image2,priceRange2,result3,rate3,location3, image3,priceRange3});
-
-
-          //Currently not doing anything with reviews, this is just a block of code just to play around with,
-          //but it currently doesn't do anything.
-          client.reviews(biz_id).then (response => {
-            var biz_reviews = response.jsonBody.reviews;
-
-          })
 
         })
 
@@ -328,8 +330,7 @@ const yelptoken = yelp.accessToken(myKey, secretKey).then(response => {
 
 });
 
-// Render button ridirect pages for buzzed, tipsy, drunk, and hammered.
-
+// Render button ridirect pages for buzzed, tipsy, drunk, hammered based on user's genders.
 app.get("/buzzedmale", function(req, res) {
   res.render(__dirname + "/views/drunk_level/buzzedmale.ejs", {mainusername, mainuserphoto, mainusergender, mainuseremail});
  });
