@@ -6,6 +6,16 @@
   <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 </head>
 
+<style type="text/css">
+.bgimg {
+    background-image: url("http://geeglenews.com/wp-content/uploads/2017/03/simple-background-32898924.jpg");
+    background-size:100% 100%;
+    background-repeat: no-repeat;
+}
+</style>
+
+<div class="bgimg">
+
 <body id="body">
     <nav class="navbar navbar-default" id="navColour">
         <div class="container-fluid">
@@ -17,8 +27,7 @@
                     <li id="clr" ><a href="http://localhost:8000/">Home</a></li>
                     <li id="clr" class="active"><a href="#">Drink Selector</a></li>
                     <li id="clr"><a href="#">Bar Crawl</a></li>
-                    <li id="clr"><a href="#">My History</a></li>
-                    <li id="clr"><a href="">Current User: <img src="<%= mainuserphoto %>" class="img-circle" width="25" height="25" text ="right"><%= mainusername %></a></li>
+                    <li id="clr"><a href="">Current User: <img src="<%= mainuserphoto %>" class="img-circle" width="25" height="25" text ="right"> <%= mainusername %></a></li>
                 </ul>
             </div>
         </div>
@@ -43,19 +52,16 @@
 
 <br><br>
 <div class="bordered" height = "100" width = "100">
-  <h4>Your User Info:</h4>    <img src="http://icons.iconarchive.com/icons/custom-icon-design/silky-line-user/256/user-info-icon.png" border="0" width="30" height = "30"/><br>
+  <h4>Your User Info:</h4>    <img src="<%= mainuserphoto %>" class="img-circle" width="40" height="40" text ="right"><br>
   <h5>Name:  <%= mainusername %></h5>
   <h5>Gender: <%= mainusergender %></h5>
   <h5>Email: <%= mainuseremail %></h5>
-  <h5>Weight: {{userweight}} pounds</h5>
+  <h5>Weight: <b>{{userweight}}</b> pounds</h5>
 </div>
 
-
-<h3> You should ...<br> <br>Have a beer or two. <br>
-Or some wine.</h3> <br>
-
-<h3> You should drink...<br>
-responsibly and make sure you know your limit before proceeding!</h3><br>
+<h3> You should ...<br>
+drink responsibly. <br>
+Make sure you know your limit before proceeding!</h3><br>
 
 If you're trying to wake up tomorrow and not remember the night before, the ideal Blood Alcohol Concentration (BAC) to get smashed <br>is anywhere roughly beyond 0.20%, varying from person to person given their gender and weight. The following chart provides an estimate of the number of drinks needed <br>sto reach the 0.20%+ BAC range for drinkers who have not developed tolerance. <a href="http://www.hbcprotocols.com/anti-alcohol/perfectbuzz.html">Read more...</a><br><br>
 
@@ -119,12 +125,12 @@ If you're trying to wake up tomorrow and not remember the night before, the idea
 <div id="wrap">
     <div id="left_col">
     <img src="http://dispatchist.com/wp-content/uploads/2015/05/beers.jpg" border="0" alt=" photo yelp3.jpg" width="330" height="170"/>
-    <h3><FONT COLOR="#ff0000"><b> 10 </b></FONT> <FONT COLOR="#000080"> Beers (~12 oz.) </FONT> </h3>
+    <h3><FONT COLOR="#000080">Beer (~12 oz.) </FONT> </h3>
      How many have you shotgunned by now?
     </div>
     <div id="right_col">
         <img src="http://assets.mshanken.com/wso/Articles/2015/NS_WhiteWine042215_1600.jpg" border="0" alt=" photo yelp3.jpg" width="330" height="150"/></a><br><br>
-    <h3> <FONT COLOR="#ff0000"><b> 1 </b></FONT> <FONT COLOR="#000080">BOTTLE of Wine </FONT> </h3>
+    <h3><FONT COLOR="#000080">A bottle of Wine </FONT> </h3>
     Red, White or Rose. If you've downed a whole bottle by yourself - guaranteed you're already gone.
     </div>
 </div>
@@ -212,4 +218,6 @@ app.controller("CS411-Controller", function($scope) {
 
 <center> Created by Group 7 <br>CS411 Software Engineering - Spring 2017 <br> Boston University</center>
 <br><br>
+</div>
+
 </div>

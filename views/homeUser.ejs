@@ -18,202 +18,213 @@ We likely won't do height, mostly weight and gender, so that's something to keep
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 </head>
-<title>The Liquor Locator.</title>
 
-<body id="body">
-  <nav class="navbar navbar-default" id="navColour">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a id="clr" class="navbar-brand" href="#">The Liquor Locator</a>
-      </div>
-      <div>
-        <ul class="nav navbar-nav" >
-          <li id="clr" class="active"><a href="#">Home</a></li>
-          <li id="clr"><a href="#">Drinks</a></li>
-          <li id="clr"><a href="#">Location Search</a></li>
-          <li id="clr"><a href="">Current User: <img src="<%= userphoto %>" class="img-circle" width="25" height="25" text ="right"> <%= userfullname %></a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</body>
-
-<!-- controller later to be migrated in separate file, so need to move
-this <script> body into a separate folder called controller.js, and then
-just add it as a link rel ^ in head, probably should do this soon, as this
-section is getting very bloated. -->
-
-<script>
-var myApp = angular.module("myApp", []);
-myApp.controller("myAppCtrl", ["$scope", "$http", function($scope, $http) {
-  $scope.beeramt = 5;
-  $scope.wineamt = 3;
-  $scope.cocktailamt = 6;
-  $scope.exoticamt = 4;
-  $scope.hoverBuzzed = function() {
-    this.hoverBuzzedmsg = true;
-  }
-  $scope.hoverOutBuzzed = function() {
-    this.hoverBuzzedmsg = false;
-  }
-  $scope.hoverTipsy = function() {
-    this.hoverTipsymsg = true;
-  }
-  $scope.hoverOutTipsy = function() {
-    this.hoverTipsymsg = false;
-  }
-  $scope.hoverDrunk = function() {
-    this.hoverDrunkmsg = true;
-  }
-  $scope.hoverOutDrunk = function() {
-    this.hoverDrunkmsg = false;
-  }
-  $scope.hoverHammered = function() {
-    this.hoverHammeredmsg = true;
-  }
-  $scope.hoverOutHammered = function() {
-    this.hoverHammeredmsg = false;
-  }
-}]);
-</script>
-<script>
-function w3_open() {
-  document.getElementById("main").style.marginLeft = "25%";
-  document.getElementById("mySidebar").style.width = "25%";
-  document.getElementById("mySidebar").style.display = "block";
-  document.getElementById("openNav").style.display = 'none';
-}
-function w3_close() {
-  document.getElementById("main").style.marginLeft = "0%";
-  document.getElementById("mySidebar").style.display = "none";
-  document.getElementById("openNav").style.display = "inline-block";
-}
-</script>
-
-<center>
-  <a href="http://localhost:8000/" target="_blank"><img src="http://i347.photobucket.com/albums/p449/shawtyjesshhicuhh/UnJIsXuL_zpsxpj4fwd9.gif" border="0" alt=" photo UnJIsXuL_zpsxpj4fwd9.gif"/></a>
-</center>
-<!-- the actual HTML body --->
-<div ng-app="myApp" ng-controller="myAppCtrl">
-<style>
-.bordered {
-  width: 400px;
-  height: 175px;
-  padding: 10px;
-  border: 2px solid black;
+<style type="text/css">
+.bgimg {
+    background-image: url("http://geeglenews.com/wp-content/uploads/2017/03/simple-background-32898924.jpg");
+    background-size:100% 100%;
+    background-repeat: no-repeat;
 }
 </style>
-<body>
+
+<div class="bgimg">
+  <title>The Liquor Locator.</title>
+
+  <body id="body">
+    <nav class="navbar navbar-default" id="navColour">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a id="clr" class="navbar-brand" href="#">The Liquor Locator</a>
+        </div>
+        <div>
+          <ul class="nav navbar-nav" >
+            <li id="clr" class="active"><a href="#">Home</a></li>
+            <li id="clr"><a href="#">Drinks</a></li>
+            <li id="clr"><a href="#">Location Search</a></li>
+            <li id="clr"><a href="">Current User: <img src="<%= userphoto %>" class="img-circle" width="25" height="25" text ="right"> <%= userfullname %></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </body>
+
+  <!-- controller later to be migrated in separate file, so need to move
+  this <script> body into a separate folder called controller.js, and then
+  just add it as a link rel ^ in head, probably should do this soon, as this
+  section is getting very bloated. -->
+
+  <script>
+  var myApp = angular.module("myApp", []);
+  myApp.controller("myAppCtrl", ["$scope", "$http", function($scope, $http) {
+    $scope.beeramt = 5;
+    $scope.wineamt = 3;
+    $scope.cocktailamt = 6;
+    $scope.exoticamt = 4;
+    $scope.hoverBuzzed = function() {
+      this.hoverBuzzedmsg = true;
+    }
+    $scope.hoverOutBuzzed = function() {
+      this.hoverBuzzedmsg = false;
+    }
+    $scope.hoverTipsy = function() {
+      this.hoverTipsymsg = true;
+    }
+    $scope.hoverOutTipsy = function() {
+      this.hoverTipsymsg = false;
+    }
+    $scope.hoverDrunk = function() {
+      this.hoverDrunkmsg = true;
+    }
+    $scope.hoverOutDrunk = function() {
+      this.hoverDrunkmsg = false;
+    }
+    $scope.hoverHammered = function() {
+      this.hoverHammeredmsg = true;
+    }
+    $scope.hoverOutHammered = function() {
+      this.hoverHammeredmsg = false;
+    }
+  }]);
+  </script>
+  <script>
+  function w3_open() {
+    document.getElementById("main").style.marginLeft = "25%";
+    document.getElementById("mySidebar").style.width = "25%";
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("openNav").style.display = 'none';
+  }
+  function w3_close() {
+    document.getElementById("main").style.marginLeft = "0%";
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("openNav").style.display = "inline-block";
+  }
+  </script>
+
   <center>
-    <font face="Century Gothic"><h3> A BU kid’s ideal, all-inclusive app for a night out.</h3></font>
-    <h3><i class="em em-8ball"></i><i class="em em-kissing_closed_eyes"></i><i class="em em-see_no_evil"></i></h3>
-
-<h3>Welcome, <img src="<%= userphoto %>" class="img-circle">   <%= userfullname %>! </h3>
-  <div class="bordered" height = "100" width = "100">
-    <h4>Your User Info:</h4>    <img src="http://icons.iconarchive.com/icons/custom-icon-design/silky-line-user/256/user-info-icon.png" border="0" width="30" height = "30"/><br>
-    <h5>Name:  <%= userfullname %></h5>
-    <h5>Gender: <%= usergender %></h5>
-    <h5>Email: <%= useremail %></h5>
-  </div>
-
-    <br>
+    <a href="http://localhost:8000/" target="_blank"><img src="http://i347.photobucket.com/albums/p449/shawtyjesshhicuhh/UnJIsXuL_zpsxpj4fwd9.gif" border="0" alt=" photo UnJIsXuL_zpsxpj4fwd9.gif"/></a>
+  </center>
+  <!-- the actual HTML body --->
+  <div ng-app="myApp" ng-controller="myAppCtrl">
+  <style>
+  .bordered {
+    width: 400px;
+    height: 175px;
+    padding: 10px;
+    border: 2px solid black;
+  }
+  </style>
+  <body>
     <center>
-      <font face="Century Gothic"><h3> Let's start off simple.</h3></font>
-    </center>
+      <font face="Century Gothic"><h3> A BU student’s ideal, all-inclusive app for a night out.</h3></font>
+      <h3><i class="em em-8ball"></i><i class="em em-kissing_closed_eyes"></i><i class="em em-see_no_evil"></i></h3>
 
-
-
-    <style type="text/css">
-    #wrap {
-      width:800px;
-      margin:0 auto;
-    }
-    #left_col {
-      float:left;
-      width:300px;
-    }
-    #right_col {
-      float:right;
-      width:300px;
-    }
-
-    #p {
-      display: inline-block;
-    }
-    </style>
-    <div id="wrap">
-      <div id="left_col">
-        <h3>How drunk are you looking to get tonight?</h3><br>
-
-        <div class="drunkstages">
-          <div id = "p">
-            <form method = "GET" action = <%=buzzedurl%>>
-              <button class ="btn btn-lg btn-primary" ng-mouseover="hoverBuzzed()" ng-mouseleave="hoverOutBuzzed()" input type = "submit" value = "submit">Buzzed</button>
-            </form>
-          </div>
-          <div id = "p">
-            <form method = "GET" action = <%=tipsyurl%>>
-              <button class ="btn btn-lg btn-info" ng-mouseover="hoverTipsy()" ng-mouseleave="hoverOutTipsy()" input type = "submit" value = "submit">Tipsy</button>
-            </form>
-          </div>
-          <div id = "p">
-            <form method = "GET" action = <%=drunkurl%>>
-              <button class="btn btn-lg btn-warning" ng-mouseover="hoverDrunk()" ng-mouseleave="hoverOutDrunk()" input type = "submit" value = "submit">Drunk</button>
-            </form>
-          </div>
-          <div id = "p">
-            <form method = "GET" action= <%=hammeredurl%>>
-              <button class ="btn btn-lg btn-danger" ng-mouseover ="hoverHammered()" ng-mouseleave="hoverOutHammered()" input type = "submit" value = "submit">Hammered</button>
-            </form>
-          </div>
-          <br><br>
-          Choose responsibly.
-          <!--block of messages for the hover-over text descriptions of the stages of drunkedness -->
-
-          <span ng-show="hoverBuzzedmsg"><h3>Just a nice, warm fuzzy feeling.</h3></a></span>
-          <span ng-show="hoverTipsymsg"><h3>Things aren't spinning yet but you still feel good.</h3></span>
-          <span ng-show="hoverDrunkmsg"><h3>You might be falling all over the place, soon.</h3></span>
-          <span ng-show="hoverHammeredmsg"><h3>TOTALLY WASTED</h3><img src="http://i347.photobucket.com/albums/p449/shawtyjesshhicuhh/totally%20wasted_zpsiaqjmpe5.gif" border="0" alt=" photo totally wasted_zpsiaqjmpe5.gif"/></span>
-        </div>
-
-      </div>
-      <div id="right_col">
-        <h3>Search for local places that offer your favorite drinks.</h3><br/>
-        <div class="bordered">
-          <h4>
-            <form action="/yelpresult" method="GET">
-              I'm looking for: <input type = "text" placeholder="bourbon, tequila..." name="search"><br><br>
-              Location: <input type="text" placeholder="boston, sf, seattle..." name="location"><br><br>
-              <button class = "btn btn-info btn-lg" input type="submit" value = "submit">Submit</button>
-            </form>
-          </div>
-        </div>
-      </div>
+  <h3>Welcome, <img src="<%= userphoto %>" class="img-circle">   <%= userfullname %>! </h3>
+    <div class="bordered" height = "100" width = "100">
+      <h4>Your User Info:</h4>    <img src="http://icons.iconarchive.com/icons/custom-icon-design/silky-line-user/256/user-info-icon.png" border="0" width="30" height = "30"/><br>
+      <h5>Name:  <%= userfullname %></h5>
+      <h5>Gender: <%= usergender %></h5>
+      <h5>Email: <%= useremail %></h5>
+    </div>
 
       <br>
-      <br><br><br><br><br>
-      <br><br><br><br><br>
+      <center>
+        <font face="Century Gothic"><h3> Let's start off simple.</h3></font>
+      </center>
 
 
-      <br><br><br><br><br>
-      <br><br><br><br><br>
 
-      <!--the row of drinks in emoji form with the amounts below -->
+      <style type="text/css">
+      #wrap {
+        width:800px;
+        margin:0 auto;
+      }
+      #left_col {
+        float:left;
+        width:300px;
+      }
+      #right_col {
+        float:right;
+        width:300px;
+      }
 
-      <div class="drinkrow">
-        <div class="col-sm-3"><img src = "https://www.emojibase.com/resources/img/emojis/apple/x1f37a.png.pagespeed.ic.BvtGLK8p4U.png" width="55" height="55"><h2>{{beeramt}}</h2></div>
-        <div class="col-sm-3"><img src= "https://www.emojibase.com/resources/img/emojis/apple/x1f377.png.pagespeed.ic.Y4pP3pJvP7.png" width="55" height="55"><h2>{{wineamt}}</h2></div>
-        <div class="col-sm-3"><img src= "http://emojipedia-us.s3.amazonaws.com/cache/75/b5/75b5b7de7d3fbd44b5463325f21e3f84.png" width="55" height="55"><h2>{{cocktailamt}}</h2></div>
-        <div class="col-sm-3"><img src="http://emojipedia-us.s3.amazonaws.com/cache/8d/a0/8da04eba0f33cdcc0a503b48b708d548.png" width="55" height="55"><h2>{{exoticamt}}</h2></div>
-      </div>
+      #p {
+        display: inline-block;
+      }
+      </style>
+      <div id="wrap">
+        <div id="left_col">
+          <h3>How drunk are you looking to get tonight?</h3><br>
 
-    </center>
-  </body>
+          <div class="drunkstages">
+            <div id = "p">
+              <form method = "GET" action = <%=buzzedurl%>>
+                <button class ="btn btn-lg btn-primary" ng-mouseover="hoverBuzzed()" ng-mouseleave="hoverOutBuzzed()" input type = "submit" value = "submit">Buzzed</button>
+              </form>
+            </div>
+            <div id = "p">
+              <form method = "GET" action = <%=tipsyurl%>>
+                <button class ="btn btn-lg btn-info" ng-mouseover="hoverTipsy()" ng-mouseleave="hoverOutTipsy()" input type = "submit" value = "submit">Tipsy</button>
+              </form>
+            </div>
+            <div id = "p">
+              <form method = "GET" action = <%=drunkurl%>>
+                <button class="btn btn-lg btn-warning" ng-mouseover="hoverDrunk()" ng-mouseleave="hoverOutDrunk()" input type = "submit" value = "submit">Drunk</button>
+              </form>
+            </div>
+            <div id = "p">
+              <form method = "GET" action= <%=hammeredurl%>>
+                <button class ="btn btn-lg btn-danger" ng-mouseover ="hoverHammered()" ng-mouseleave="hoverOutHammered()" input type = "submit" value = "submit">Hammered</button>
+              </form>
+            </div>
+            <br><br>
+            Choose responsibly.
+            <!--block of messages for the hover-over text descriptions of the stages of drunkedness -->
+
+            <span ng-show="hoverBuzzedmsg"><h3>Just a nice, warm fuzzy feeling.</h3></a></span>
+            <span ng-show="hoverTipsymsg"><h3>Things aren't spinning yet but you still feel good.</h3></span>
+            <span ng-show="hoverDrunkmsg"><h3>You might be falling all over the place, soon.</h3></span>
+            <span ng-show="hoverHammeredmsg"><h3>TOTALLY WASTED</h3><img src="http://i347.photobucket.com/albums/p449/shawtyjesshhicuhh/totally%20wasted_zpsiaqjmpe5.gif" border="0" alt=" photo totally wasted_zpsiaqjmpe5.gif"/></span>
+          </div>
+
+        </div>
+        <div id="right_col">
+          <h3>Search for local places that offer your favorite drinks.</h3><br/>
+          <div class="bordered">
+            <h4>
+              <form action="/yelpresult" method="GET">
+                I'm looking for: <input type = "text" placeholder="bourbon, tequila..." name="search"><br><br>
+                Location: <input type="text" placeholder="boston, sf, seattle..." name="location"><br><br>
+                <button class = "btn btn-info btn-lg" input type="submit" value = "submit">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <br>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+
+
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+
+        <!--the row of drinks in emoji form with the amounts below -->
+
+        <div class="drinkrow">
+          <div class="col-sm-3"><img src = "https://www.emojibase.com/resources/img/emojis/apple/x1f37a.png.pagespeed.ic.BvtGLK8p4U.png" width="55" height="55"><h2>{{beeramt}}</h2></div>
+          <div class="col-sm-3"><img src= "https://www.emojibase.com/resources/img/emojis/apple/x1f377.png.pagespeed.ic.Y4pP3pJvP7.png" width="55" height="55"><h2>{{wineamt}}</h2></div>
+          <div class="col-sm-3"><img src= "http://emojipedia-us.s3.amazonaws.com/cache/75/b5/75b5b7de7d3fbd44b5463325f21e3f84.png" width="55" height="55"><h2>{{cocktailamt}}</h2></div>
+          <div class="col-sm-3"><img src="http://emojipedia-us.s3.amazonaws.com/cache/8d/a0/8da04eba0f33cdcc0a503b48b708d548.png" width="55" height="55"><h2>{{exoticamt}}</h2></div>
+        </div>
+
+      </center>
+    </body>
+  </div>
+
+  <br><br><br><br><br>
+
+
+  <center> Created by Group 7 <br>CS411 Software Engineering - Spring 2017 <br> Boston University</center>
+
+  <br><br><br>
 </div>
-
-<br><br><br><br><br>
-
-
-<center> Created by Group 7 <br>CS411 Software Engineering - Spring 2017 <br> Boston University</center>
-
-<br><br><br>

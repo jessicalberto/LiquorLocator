@@ -6,6 +6,16 @@
   <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 </head>
 
+<style type="text/css">
+.bgimg {
+    background-image: url("http://geeglenews.com/wp-content/uploads/2017/03/simple-background-32898924.jpg");
+    background-size:100% 100%;
+    background-repeat: no-repeat;
+}
+</style>
+
+<div class="bgimg">
+
 <body id="body">
     <nav class="navbar navbar-default" id="navColour">
         <div class="container-fluid">
@@ -17,8 +27,7 @@
                     <li id="clr" ><a href="http://localhost:8000/successful_login">Home</a></li>
                     <li id="clr" class="active"><a href="#">Drink Selector</a></li>
                     <li id="clr"><a href="#">Bar Crawl</a></li>
-                    <li id="clr"><a href="#">My History</a></li>
-                    <li id="clr"><a href="">Current User: <img src="<%= mainuserphoto %>" class="img-circle" width="25" height="25" text ="right"><%= mainusername %></a></li>
+                    <li id="clr"><a href="">Current User: <img src="<%= mainuserphoto %>" class="img-circle" width="25" height="25" text ="right"> <%= mainusername %></a></li>
                 </ul>
             </div>
         </div>
@@ -42,11 +51,11 @@
 
 <br><br>
 <div class="bordered" height = "100" width = "100">
-  <h4>Your User Info:</h4>    <img src="http://icons.iconarchive.com/icons/custom-icon-design/silky-line-user/256/user-info-icon.png" border="0" width="30" height = "30"/><br>
+  <h4>Your User Info:</h4>    <img src="<%= mainuserphoto %>" class="img-circle" width="40" height="40" text ="right"><br>
   <h5>Name:  <%= mainusername %></h5>
   <h5>Gender: <%= mainusergender %></h5>
   <h5>Email: <%= mainuseremail %></h5>
-  <h5>Weight: {{userweight}} pounds</h5>
+  <h5>Weight: <b>{{userweight}}</b> pounds</h5>
 </div>
 
 <h3> You should ...<br> <br>Have a beer or two. <br>
@@ -80,13 +89,13 @@ The ideal Blood Alcohol Concentration (BAC) for the perfect buzz is .04-.06. <br
 <div id="wrap">
     <div id="left_col">
     <img src="http://dispatchist.com/wp-content/uploads/2015/05/beers.jpg" border="0" alt=" photo yelp3.jpg" width="330" height="170"/>
-    <h3><FONT COLOR="#ff0000"><b> 2 </b></FONT> <FONT COLOR="#000080"> Beers (~12 oz.) </FONT> </h3>
+    <h3><FONT COLOR="#000080"> Beers (~12 oz.) </FONT> </h3>
      There are numerous types of beer out there for - all cold and ready to give you a nice buzz. Beer is typically relatively low in alcohol content, around 4-6%. This is great because it reduces the risk that alcohol will sneak up on you and leave you drunk beyond repair. Whether you or your friends are enjoying a pint at the local bar or shotgunning at a house party, beer is a very social drink. Best of all, it won’t get you too drunk if you are casually sipping, so that you won’t make a fool out of yourself (at least, not because of alcohol).
     <a href="http://berghoffbeer.com/blog/9-reasons-why-people-like-beer-so-much/">Read more...</a>
     </div>
     <div id="right_col">
         <img src="http://assets.mshanken.com/wso/Articles/2015/NS_WhiteWine042215_1600.jpg" border="0" alt=" photo yelp3.jpg" width="330" height="150"/></a><br><br>
-    <h3> <FONT COLOR="#ff0000"><b> 2 </b></FONT> <FONT COLOR="#000080">Glasses of Wine </FONT> </h3>
+    <h3><FONT COLOR="#000080">Glasses of Wine </FONT> </h3>
     Red, White or Rose. Which Wine Should You Be Drinking and Why? There's nothing quite as good as a chilled glass of rose wine on a hot day, some white wine with a tasty chicken meal, or a bit of rich red wine served with steak and pasta. Of all the alcohols, wine is known to do more good than harm. Wine buzzes give you the warm and fuzzies inside, and who doesn't like the warm and fuzzies? Wine is also well-known for its rich antioxidants, and prospective health benefits. Also, did you know one glass of red wine may be the equivalent of an hour at the gym?
     <a href="http://blog.personalwine.com/why-wine-is-the-best-buzz">Read more...</a>
     </div>
@@ -185,3 +194,5 @@ app.controller("CS411-Controller", function($scope) {
 <br><br><br>
 
 <center> Created by Group 7 <br>CS411 Software Engineering - Spring 2017 <br> Boston University</center>
+
+</div>

@@ -6,6 +6,16 @@
   <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 </head>
 
+<style type="text/css">
+.bgimg {
+    background-image: url("http://geeglenews.com/wp-content/uploads/2017/03/simple-background-32898924.jpg");
+    background-size:100% 100%;
+    background-repeat: no-repeat;
+}
+</style>
+
+<div class="bgimg">
+
 <body id="body">
     <nav class="navbar navbar-default" id="navColour">
         <div class="container-fluid">
@@ -17,8 +27,7 @@
                     <li id="clr" ><a href="http://localhost:8000/">Home</a></li>
                     <li id="clr" class="active"><a href="#">Drink Selector</a></li>
                     <li id="clr"><a href="#">Bar Crawl</a></li>
-                    <li id="clr"><a href="#">My History</a></li>
-                    <li id="clr"><a href="">Current User: <img src="<%= mainuserphoto %>" class="img-circle" width="25" height="25" text ="right"><%= mainusername %></a></li>
+                    <li id="clr"><a href="">Current User: <img src="<%= mainuserphoto %>" class="img-circle" width="25" height="25" text ="right"> <%= mainusername %></a></li>
                 </ul>
             </div>
         </div>
@@ -43,16 +52,16 @@
 
 <br><br>
 <div class="bordered" height = "100" width = "100">
-  <h4>Your User Info:</h4>    <img src="http://icons.iconarchive.com/icons/custom-icon-design/silky-line-user/256/user-info-icon.png" border="0" width="30" height = "30"/><br>
+  <h4>Your User Info:</h4>    <img src="<%= mainuserphoto %>" class="img-circle" width="40" height="40" text ="right"><br>
   <h5>Name:  <%= mainusername %></h5>
   <h5>Gender: <%= mainusergender %></h5>
   <h5>Email: <%= mainuseremail %></h5>
-  <h5>Weight: {{userweight}} pounds</h5>
+  <h5>Weight: <b>{{userweight}}</b> pounds</h5>
 </div>
 
 
-<h3> You should ...<br> <br>Have a beer or two. <br>
-Or some wine.</h3> <br>
+<h3> You should ...<br> <br>Take a couple shots. <br>
+Or down some more beer.</h3> <br>
 
 
 <center>
@@ -193,3 +202,5 @@ app.controller("CS411-Controller", function($scope) {
 <br><br><br>
 
 <center> Created by Group 7 <br>CS411 Software Engineering - Spring 2017 <br> Boston University</center>
+
+</div>
