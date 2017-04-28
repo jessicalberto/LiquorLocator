@@ -18,9 +18,10 @@ directions via Google Maps.-->
 
 <style type="text/css">
 .bgimg {
-    background-image: url("http://geeglenews.com/wp-content/uploads/2017/03/simple-background-32898924.jpg");
+    background-image: url("http://i347.photobucket.com/albums/p449/shawtyjesshhicuhh/newback_zpsdzbxrqmi.jpg");
     background-size:100% 100%;
     background-repeat: no-repeat;
+    background-blend-mode: lighten;
 }
 </style>
 
@@ -31,7 +32,7 @@ directions via Google Maps.-->
     <nav class="navbar navbar-default" id="navColour">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a id="clr" class="navbar-brand" href="#">The Liquor Locator</a>
+          <a id="clr" class="navbar-brand" href="http://localhost:8000/successful_login">The Liquor Locator</a>
         </div>
         <div>
           <ul class="nav navbar-nav" >
@@ -151,7 +152,7 @@ directions via Google Maps.-->
           <div class="drunkstages">
             <div id = "p">
               <form method = "GET" action = <%=buzzedurl%>>
-                <button class ="btn btn-lg" ng-mouseover="hoverBuzzed()" ng-mouseleave="hoverOutBuzzed()" input type = "submit" value = "submit">Buzzed</button>
+                <button class ="btn btn-lg btn-success" ng-mouseover="hoverBuzzed()" ng-mouseleave="hoverOutBuzzed()" input type = "submit" value = "submit">Buzzed</button>
               </form>
             </div>
             <div id = "p">
