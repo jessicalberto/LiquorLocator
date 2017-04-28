@@ -6,6 +6,7 @@ const yelp = require('yelp-fusion');
 const passport = require('passport');
 const mongoose = require('mongoose');
 
+
 //These are global variables that we initialize here,to later pass to each of the profiles to maintain session information as user acccesses different functions of the website.
 var useridpass = "";
 var mainusername = "";
@@ -19,8 +20,12 @@ app.use(require('express-session')({secret: 'verysecret', resave: true, saveUnin
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Access MongodB Link with Password
+var config = require('./config');
+var mongoDBkey = config.mongoLink;
+
 //This is init for Mongoose DB, connecting with Mlabs via URL.
-mongoose.connect('mongodb://yishan:dosequis@ds161029.mlab.com:61029/usersweightdrink')
+mongoose.connect(mongoDBkey)
 var db = mongoose.connection;
 
 //Linking a core schema with our mongoose db.
