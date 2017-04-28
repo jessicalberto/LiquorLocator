@@ -331,29 +331,29 @@ const yelptoken = yelp.accessToken(myKey, secretKey).then(response => {
 // Render button ridirect pages for buzzed, tipsy, drunk, and hammered.
 
 app.get("/buzzedmale", function(req, res) {
-  res.render(__dirname + "/views/drunk_level/buzzedmale.ejs");
+  res.render(__dirname + "/views/drunk_level/buzzedmale.ejs", {mainusername, mainuserphoto, mainusergender, mainuseremail});
  });
  app.get("/buzzedfemale", function(req, res) {
    res.render(__dirname + "/views/drunk_level/buzzedFemale.ejs", {mainusername, mainuserphoto, mainusergender, mainuseremail});
  })
 
 app.get("/tipsymale", function(req, res) {
-  res.render(__dirname + "/views/drunk_level/tipsyMale.ejs");
+  res.render(__dirname + "/views/drunk_level/tipsyMale.ejs", {mainusername, mainuserphoto, mainusergender, mainuseremail});
  });
  app.get("/tipsyfemale", function(req, res) {
-   res.render(__dirname + "/views/drunk_level/tipsyFemale.ejs");
+   res.render(__dirname + "/views/drunk_level/tipsyFemale.ejs", {mainusername, mainuserphoto, mainusergender, mainuseremail});
   });
 
 app.get("/drunkmale", function(req, res) {
-  res.render(__dirname + "/views/drunk_level/drunkMale.ejs");
+  res.render(__dirname + "/views/drunk_level/drunkMale.ejs", {mainusername, mainuserphoto, mainusergender, mainuseremail});
  });
  app.get("/drunkfemale", function(req, res) {
-   res.render(__dirname + "/views/drunk_level/drunkFemale.ejs");
+   res.render(__dirname + "/views/drunk_level/drunkFemale.ejs", {mainusername, mainuserphoto, mainusergender, mainuseremail});
 });
 
 app.get("/hammeredmale", function(req, res) {
-  res.render(__dirname + "/views/drunk_level/hammeredMale.ejs");
+  res.render(__dirname + "/views/drunk_level/hammeredMale.ejs", {mainusername, mainuserphoto, mainusergender, mainuseremail});
  });
  app.get("/hammeredfemale", function(req, res) {
-   res.render(__dirname + "/views/drunk_level/hammeredFemale.ejs");
+   res.render(__dirname + "/views/drunk_level/hammeredFemale.ejs", {mainusername, mainuserphoto, mainusergender, mainuseremail});
 });
