@@ -1,4 +1,12 @@
-<!-- Redirect Home Page after successful login -->
+<!-- Redirect Home Page after successful login via FB oauth.
+
+The homeuser page contains the main functionality of our app, which displays first in the center
+a profile box that has all the user's information, and from there, they can choose ewhich of the app
+function's they want to use.
+
+If they want to figure out how drunk they're looking to get, they can click
+on the buttons, or they can search for a place that offers them a drink via Yelp API, which eventually takes them to
+directions via Google Maps.-->
 
 <head>
   <html lang = "en-US">
@@ -37,10 +45,6 @@
     </nav>
   </body>
 
-  <!-- controller later to be migrated in separate file, so need to move
-  this <script> body into a separate folder called controller.js, and then
-  just add it as a link rel ^ in head, probably should do this soon, as this
-  section is getting very bloated. -->
 
   <script>
   var myApp = angular.module("myApp", []);

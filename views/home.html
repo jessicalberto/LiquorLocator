@@ -1,14 +1,8 @@
-<!-- For anyone who's looking for something to do, I would definitely recommend
-this.  Migrating the <script> over to a separate file/directory so thatt
-this web page can be purely HTMl, easier for development and organization.
-Secondly would be calculating the BAC levels.  Much of this coding will
-likely happen in Angular, but we do need to code into BAC levels, meaning
-that, based on which "drunk stage button" the user clicks (buzzed/tipsy/drunk/hammered),
-the # of drinks displayed updates in real time (no refreshing, thus need for Angular).
-So if someone wants to get hammered, then maybe all the drinks say 4+.  And at the same time
-document the height/weight diffs as that affects BAC.
-We likely won't do height, mostly weight and gender, so that's something to keep in mind. -->
+<!--  This is the main page that returns after user accesses main page.
+This page is largely empty except with a brief descrption of the app and a button
+for signing in with their Facebook account.-->
 
+<!-- Universal heading for initialization of Bootstrap/Angular/Emoji HTML package + resizing for mobile-->
 <head>
   <html lang = "en-US">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,6 +23,7 @@ We likely won't do height, mostly weight and gender, so that's something to keep
 
 <div class="bgimg">
 
+<!--navigation bar/header at the top-->
   <body id="body">
       <nav class="navbar navbar-default" id="navColour">
           <div class="container-fluid">
@@ -47,11 +42,7 @@ We likely won't do height, mostly weight and gender, so that's something to keep
       </nav>
   </body>
 
-  <!-- controller later to be migrated in separate file, so need to move
-  this <script> body into a separate folder called controller.js, and then
-  just add it as a link rel ^ in head, probably should do this soon, as this
-  section is getting very bloated. -->
-
+<!-- Base Angular script for bototm row of drinks -->
   <script>
     var myApp = angular.module("myApp", []);
     myApp.controller("myAppCtrl", ["$scope", "$http", function($scope, $http) {
