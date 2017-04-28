@@ -29,15 +29,17 @@
 <a href="http://s347.photobucket.com/user/shawtyjesshhicuhh/media/UnJIsXuL_zpsxpj4fwd9.gif.html" target="_blank"><img src="http://i347.photobucket.com/albums/p449/shawtyjesshhicuhh/UnJIsXuL_zpsxpj4fwd9.gif" border="0" alt=" photo UnJIsXuL_zpsxpj4fwd9.gif"/></a>
 </center><br>
 
+<div ng-app="CS411" ng-controller="CS411-Controller" ng-init="userweight=n/a">
+
 <center>
 <h2> So you wanna get <FONT COLOR="#000080">Hammered</FONT>... huh? </h2><br>
 
       You're almost there.<br>
       <h5>How much do you weigh?</h5>
-      <input type="number" ng-model="userweight" placeholder="100,150,200...">  pounds <br>
+      <p>Weight: <input type="number" ng-model="userweight"> pounds</p>
 
 <br>
-<button class = "btn btn-lg btn-primary" input type="submit" value = "submit">Calculate</button>
+<button class = "btn btn-lg btn-primary" input type="submit" ng-click="calculateBAC()">Calculate</button>
 
 <br><br>
 <div class="bordered" height = "100" width = "100">
@@ -45,6 +47,7 @@
   <h5>Name:  <%= mainusername %></h5>
   <h5>Gender: <%= mainusergender %></h5>
   <h5>Email: <%= mainuseremail %></h5>
+  <h5>Weight: {{userweight}} pounds</h5>
 </div>
 
 
@@ -56,6 +59,13 @@ responsibly and make sure you know your limit before proceeding!</h3><br>
 
 If you're trying to wake up tomorrow and not remember the night before, the ideal Blood Alcohol Concentration (BAC) to get smashed <br>is anywhere roughly beyond 0.20%, varying from person to person given their gender and weight. The following chart provides an estimate of the number of drinks needed <br>sto reach the 0.20%+ BAC range for drinkers who have not developed tolerance. <a href="http://www.hbcprotocols.com/anti-alcohol/perfectbuzz.html">Read more...</a><br><br>
 
+
+<div class="row">
+  <h3>Amount Needed to Achieve</h3>
+  <div class="col-sm-4"><h2>{{display}}<br> <img ng-src ={{beerpic}} width="150" height="150"></h3></div>
+  <div class="col-sm-4"><h2>{{shotsdisplay}}<br> <img ng-src={{shotspic}} width="150" height="150"></h3></div>
+  <div class="col-sm-4"><h2>{{display}}<br> <img ng-src={{winepic}} widht="150" height="150"></h3></div>
+</div><br><br>
 
 <div style="width:900px;height:600px;overflow:scroll;padding:5px; border:4px double #000080;">
 <center>
@@ -74,7 +84,7 @@ If you're trying to wake up tomorrow and not remember the night before, the idea
    width:300px;
 }
 </style>
-<center>Drink Quantity: </center><br>
+<center><h3>Recommended Drinks</center></h3><br>
 <div id="wrap">
     <div id="left_col">
           <img src="http://i347.photobucket.com/albums/p449/shawtyjesshhicuhh/jagermeister_zpsrhohqwed.jpg" border="0" alt=" photo yelp3.jpg" width="300" height="300"/>
@@ -113,7 +123,7 @@ If you're trying to wake up tomorrow and not remember the night before, the idea
      How many have you shotgunned by now?
     </div>
     <div id="right_col">
-        <img src="http://assets.mshanken.com/wso/Articles/2015/NS_WhiteWine042215_1600.jpg" border="0" alt=" photo yelp3.jpg" width="330" height="150""/></a><br><br>
+        <img src="http://assets.mshanken.com/wso/Articles/2015/NS_WhiteWine042215_1600.jpg" border="0" alt=" photo yelp3.jpg" width="330" height="150"/></a><br><br>
     <h3> <FONT COLOR="#ff0000"><b> 1 </b></FONT> <FONT COLOR="#000080">BOTTLE of Wine </FONT> </h3>
     Red, White or Rose. If you've downed a whole bottle by yourself - guaranteed you're already gone.
     </div>
@@ -134,7 +144,6 @@ If you're trying to wake up tomorrow and not remember the night before, the idea
   <h3>Now, search for places in your area that offers your poison.</h3><br/>
 
 
-<div ng-app="myApp" ng-controller="myAppCtrl">
 <style>
   .bordered {
     width: 410px;
@@ -158,10 +167,49 @@ If you're trying to wake up tomorrow and not remember the night before, the idea
 
 </center>
 
+<script>
+var app = angular.module("CS411", []);
+app.controller("CS411-Controller", function($scope) {
 
+    $scope.display="0";
+    $scope.shotsdisplay="0";
+    $scope.recshots = 0;
+    $scope.recbeers = 0;
+    $scope.recglasses = 0;
+
+    $scope.beerpic = "http://i.imgur.com/BSwWqeC.png";
+    $scope.shotspic = "http://i.imgur.com/Yt9yOri.jpg";
+    $scope.winepic = "http://i.imgur.com/E4YpADc.png";
+
+    $scope.calculateBAC = function() {
+        if ($scope.userweight >= 100 && $scope.userweight < 120) {
+          $scope.display = "3+";
+          $scope.shotsdisplay = "2+";
+        }
+        else if ($scope.userweight >= 120 && $scope.userweight < 140) {
+          $scope.display = "4+";
+          $scope.shotsdisplay = "3+";
+        }
+        else if ($scope.userweight >= 140 && $scope.userweight < 160) {
+          $scope.display = "4+";
+          $scope.shotsdisplay = "3+";
+        }
+        else if ($scope.userweight >= 180 && $scope.userweight < 200) {
+          $scope.display = "5+";
+          $scope.shotsdisplay = "4+";
+        }
+        else {
+          $scope.display = "6+";
+          $scope.shotsdisplay = "5+";
+        }
+      }
+
+  })
+</script>
 
 
 <br><br><br>
 
 <center> Created by Group 7 <br>CS411 Software Engineering - Spring 2017 <br> Boston University</center>
 <br><br>
+</div>

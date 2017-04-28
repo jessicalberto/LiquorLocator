@@ -32,12 +32,14 @@
 <center>
 <h2> So you wanna get <FONT COLOR="#000080">Drunk</FONT>... huh? </h2><br>
 
+<div ng-app="CS411" ng-controller="CS411-Controller" ng-init="userweight=n/a">
+
       You're almost there.<br>
       <h5>How much do you weigh?</h5>
-      <input type="number" ng-model="userweight" placeholder="100,150,200...">  pounds <br>
+      <p>Weight: <input type="number" ng-model="userweight"> pounds</p>
 
 <br>
-<button class = "btn btn-lg btn-primary" input type="submit" value = "submit">Calculate</button>
+<button class = "btn btn-lg btn-primary" input type="submit" ng-click="calculateBAC()">Calculate</button>
 
 <br><br>
 <div class="bordered" height = "100" width = "100">
@@ -45,7 +47,9 @@
   <h5>Name:  <%= mainusername %></h5>
   <h5>Gender: <%= mainusergender %></h5>
   <h5>Email: <%= mainuseremail %></h5>
+  <h5>Weight: {{userweight}} pounds</h5>
 </div>
+
 
 <h3> You should ...<br> <br>Have a beer or two. <br>
 Or some wine.</h3> <br>
@@ -54,6 +58,13 @@ Or some wine.</h3> <br>
 <center>
 
 The ideal Blood Alcohol Concentration (BAC) for an optimal drunk is 0.11% to 0.18%.  <br>To reach a BAC of 0.11% to 0.18%., you must know how many drinks you need to consume given your gender and weight.<br>  Read more to see a chart provides an estimate of the number of drinks needed to reach the 0.11% to 0.18% BAC range for <br>drinkers who have not developed tolerance. <a href="http://www.hbcprotocols.com/anti-alcohol/perfectbuzz.html">Read more...</a><br><br>
+
+<div class="row">
+  <h3>Amount Needed to Achieve</h3>
+  <div class="col-sm-4"><h2>{{display}}<br> <img ng-src ={{beerpic}} width="150" height="150"></h3></div>
+  <div class="col-sm-4"><h2>{{shotsdisplay}}<br> <img ng-src={{shotspic}} width="150" height="150"></h3></div>
+  <div class="col-sm-4"><h2>{{display}}<br> <img ng-src={{winepic}} widht="150" height="150"></h3></div>
+</div><br><br>
 
 <div style="width:900px;height:600px;overflow:scroll;padding:5px; border:4px double #000080;">
 <center>
@@ -73,7 +84,7 @@ The ideal Blood Alcohol Concentration (BAC) for an optimal drunk is 0.11% to 0.1
 }
 </style>
 <div id="wrap">
-
+  <center><h3>Recommended Drinks</center></h3><br>
     <div id="left_col">
     <img src="https://drinkedin.net/images/easyblog_images/62/Long-Island-Ice-Tea.jpg" border="0" alt=" photo yelp3.jpg" width="150" height="200"/>
     <h3><FONT COLOR="#ff0000"><b> 6 </b></FONT> <FONT COLOR="#000080"> Long Island Iced Teas </FONT> </h3>
@@ -110,12 +121,49 @@ The ideal Blood Alcohol Concentration (BAC) for an optimal drunk is 0.11% to 0.1
 
 <br><br><br><br><br>
 
+<script>
+var app = angular.module("CS411", []);
+app.controller("CS411-Controller", function($scope) {
 
+    $scope.display="0";
+    $scope.shotsdisplay="0";
+    $scope.recshots = 0;
+    $scope.recbeers = 0;
+    $scope.recglasses = 0;
+
+    $scope.beerpic = "http://i.imgur.com/BSwWqeC.png";
+    $scope.shotspic = "http://i.imgur.com/Yt9yOri.jpg";
+    $scope.winepic = "http://i.imgur.com/E4YpADc.png";
+
+    $scope.calculateBAC = function() {
+        if ($scope.userweight >= 100 && $scope.userweight < 120) {
+          $scope.display = "3+";
+          $scope.shotsdisplay = "2+";
+        }
+        else if ($scope.userweight >= 120 && $scope.userweight < 140) {
+          $scope.display = "4+";
+          $scope.shotsdisplay = "3+";
+        }
+        else if ($scope.userweight >= 140 && $scope.userweight < 160) {
+          $scope.display = "4+";
+          $scope.shotsdisplay = "3+";
+        }
+        else if ($scope.userweight >= 180 && $scope.userweight < 200) {
+          $scope.display = "5+";
+          $scope.shotsdisplay = "4+";
+        }
+        else {
+          $scope.display = "6+";
+          $scope.shotsdisplay = "5+";
+        }
+      }
+
+  })
+</script>
 
   <h3>Now, search for places in your area that offers your poison.</h3><br/>
 
 
-<div ng-app="myApp" ng-controller="myAppCtrl">
 <style>
   .bordered {
     width: 410px;

@@ -28,15 +28,17 @@
 <a href="http://s347.photobucket.com/user/shawtyjesshhicuhh/media/UnJIsXuL_zpsxpj4fwd9.gif.html" target="_blank"><img src="http://i347.photobucket.com/albums/p449/shawtyjesshhicuhh/UnJIsXuL_zpsxpj4fwd9.gif" border="0" alt=" photo UnJIsXuL_zpsxpj4fwd9.gif"/></a>
 </center><br>
 
+<div ng-app="CS411" ng-controller="CS411-Controller" ng-init="userweight=n/a">
+
 <center>
 <h2> So you wanna get <FONT COLOR="#000080">Buzzed</FONT>... huh? </h2><br>
 
       You're almost there.<br>
       <h5>How much do you weigh?</h5>
-      <input type="number" ng-model="userweight" placeholder="100,150,200...">  pounds <br>
+      <p>Weight: <input type="number" ng-model="userweight"> pounds</p>
 
 <br>
-<button class = "btn btn-lg btn-primary" input type="submit" value = "submit">Calculate</button>
+<button class = "btn btn-lg btn-primary" input type="submit" ng-click="calculateBAC()">Calculate</button>
 
 <br><br>
 <div class="bordered" height = "100" width = "100">
@@ -44,6 +46,7 @@
   <h5>Name:  <%= mainusername %></h5>
   <h5>Gender: <%= mainusergender %></h5>
   <h5>Email: <%= mainuseremail %></h5>
+  <h5>Weight: {{userweight}} pounds</h5>
 </div>
 
 <h3> You should ...<br> <br>Have a beer or two. <br>
@@ -52,6 +55,13 @@ Or some wine.</h3> <br>
 <center>
 
 The ideal Blood Alcohol Concentration (BAC) for the perfect buzz is .04-.06. <br>To reach a BAC of .04-.06, you must know how many drinks you need to consume given your sex and weight.<br>  The following chart provides an estimate of the number of drinks needed to reach the .04-.06 BAC range for <br>drinkers who have not developed tolerance. <a href="http://www.hbcprotocols.com/anti-alcohol/perfectbuzz.html">Read more...</a><br><br>
+
+<div class="row">
+  <h3>Amount Needed to Achieve</h3>
+  <div class="col-sm-4"><h2>{{display}}<br> <img ng-src ={{beerpic}} width="150" height="150"></h3></div>
+  <div class="col-sm-4"><h2>{{shotsdisplay}}<br> <img ng-src={{shotspic}} width="150" height="150"></h3></div>
+  <div class="col-sm-4"><h2>{{display}}<br> <img ng-src={{winepic}} widht="150" height="150"></h3></div>
+</div><br><br>
 
 <style type="text/css">
 #wrap {
@@ -75,7 +85,7 @@ The ideal Blood Alcohol Concentration (BAC) for the perfect buzz is .04-.06. <br
     <a href="http://berghoffbeer.com/blog/9-reasons-why-people-like-beer-so-much/">Read more...</a>
     </div>
     <div id="right_col">
-        <img src="http://assets.mshanken.com/wso/Articles/2015/NS_WhiteWine042215_1600.jpg" border="0" alt=" photo yelp3.jpg" width="330" height="150""/></a><br><br>
+        <img src="http://assets.mshanken.com/wso/Articles/2015/NS_WhiteWine042215_1600.jpg" border="0" alt=" photo yelp3.jpg" width="330" height="150"/></a><br><br>
     <h3> <FONT COLOR="#ff0000"><b> 2 </b></FONT> <FONT COLOR="#000080">Glasses of Wine </FONT> </h3>
     Red, White or Rose. Which Wine Should You Be Drinking and Why? There's nothing quite as good as a chilled glass of rose wine on a hot day, some white wine with a tasty chicken meal, or a bit of rich red wine served with steak and pasta. Of all the alcohols, wine is known to do more good than harm. Wine buzzes give you the warm and fuzzies inside, and who doesn't like the warm and fuzzies? Wine is also well-known for its rich antioxidants, and prospective health benefits. Also, did you know one glass of red wine may be the equivalent of an hour at the gym?
     <a href="http://blog.personalwine.com/why-wine-is-the-best-buzz">Read more...</a>
@@ -100,6 +110,46 @@ men, and even less for women who are on the birth control pill).  So, to avoid o
 have no more than one beer or glass per hour.<a href="https://lordsofthedrinks.com/2013/07/31/top-7-drinks-that-smash-you-surprisingly-fast/"> Read more...</a>
 
 <br><br><br>
+
+<script>
+var app = angular.module("CS411", []);
+app.controller("CS411-Controller", function($scope) {
+
+    $scope.display="0";
+    $scope.shotsdisplay="0";
+    $scope.recshots = 0;
+    $scope.recbeers = 0;
+    $scope.recglasses = 0;
+
+    $scope.beerpic = "http://i.imgur.com/BSwWqeC.png";
+    $scope.shotspic = "http://i.imgur.com/Yt9yOri.jpg";
+    $scope.winepic = "http://i.imgur.com/E4YpADc.png";
+
+    $scope.calculateBAC = function() {
+        if ($scope.userweight >= 100 && $scope.userweight < 120) {
+          $scope.display = "1";
+          $scope.shotsdisplay = "0";
+        }
+        else if ($scope.userweight >= 120 && $scope.userweight < 140) {
+          $scope.display = "1";
+          $scope.shotsdisplay = "0";
+        }
+        else if ($scope.userweight >= 140 && $scope.userweight < 160) {
+          $scope.display = "2";
+          $scope.shotsdisplay = "1";
+        }
+        else if ($scope.userweight >= 180 && $scope.userweight < 200) {
+          $scope.display = "2";
+          $scope.shotsdisplay = "1";
+        }
+        else {
+          $scope.display = "3";
+          $scope.shotsdisplay = "2";
+        }
+      }
+
+  })
+</script>
 
 
   <h3>Now, search for places in your area that offers your poison.</h3><br/>
