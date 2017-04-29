@@ -1,4 +1,4 @@
-# CS411Group7
+# CS411 - Software Engineering: The Liquor Locator
 CS 411 - Group 7 Project - Website Application
 
 This is Group 7's GitHub repository for our final project. 
