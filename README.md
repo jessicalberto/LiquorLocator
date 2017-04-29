@@ -14,13 +14,13 @@ Our website application serves as "a BU student’s ideal, all-inclusive app for
 # Requirements
 1)  Node - to check, type node --version into console.  Otherwise, you can download Node here: https://nodejs.org/en/download/
 2)  Internet browser (Safari, Chrome, IE, Firefox, etc...)
-3)  An open PORT 8000
+3)  An open PORT 8000 for the app to run in
 4)  Facebook account for logging in/accessing app functionality
 
 # How to Deploy
 1) Clone/download LiquorLocator as zip or onto your desktop.
 2) cd into the main LiquorLocator directory via your CLI
-3) Type "node server.js"
+3) Type "node server.js" into your CL
 4) You should see verification via CLI printout statements that the app is up and running.
 5) Open up your internet browser of choice and go to http://localhost:8000
 
