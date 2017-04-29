@@ -10,5 +10,5 @@ Our website application serves as "a BU student’s ideal, all-inclusive app for
 * 3) The user can use our final bar crawl feature to search for local bars around their location that offer the drinks they're looking for.  This uses the Yelp API in conjunction with the Google Maps API, as we offer the top 3 results, their Yelp details, along with immediate directions (walking) on how to get those places from where they live on campus.  The Google Maps naturally optimizes for one route amongst all 3 locations as directions for a true "bar crawl."
 
 
-![Alt text](http://s347.photobucket.com/user/shawtyjesshhicuhh/media/lqrlctr_zpszpocunku.png.html "lqrlctr")
+![alt text](http://i347.photobucket.com/albums/p449/shawtyjesshhicuhh/lqrlctr_zpszpocunku.png)
 
