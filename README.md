@@ -23,7 +23,7 @@ Our website application serves as "a BU student’s ideal, all-inclusive app for
 1) Clone/download LiquorLocator as zip or onto your desktop.
 2) cd into the main LiquorLocator directory via your CLI
 3) Get access to configuration information from contributor
-4) Type 'node server.js' into your CL
+4) Type `node server.js` into your CL
 5) You should see verification via CLI printout statements that the app is up and running.
 6) Open up your internet browser of choice and go to http://localhost:8000
 
