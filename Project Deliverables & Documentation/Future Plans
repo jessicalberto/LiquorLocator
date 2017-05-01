@@ -1,0 +1,9 @@
+Plans for The Future: 
+
+If we had more time to implement the application, we would do a variety of things to add functionality described below: 
+
+  1. Store user's search history/favorite alcoholic beverage
+      - We initially planned for this to be implemented in the app early on, but were constrained on time and decided it was not staple to be incorporated into the final version. 4
+      
+  2. Add Twitter 3rd Party Authentication, in conjunction with Facebook
+      - Got Facebook done, but ran into some troubles with Twitter. 
