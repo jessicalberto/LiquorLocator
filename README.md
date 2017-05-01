@@ -2,7 +2,7 @@
 CS 411 - Group 7 Project - Website Application
 
 This is Group 7's GitHub repository for our final project. 
-<!-- Updated description on 4/28 -->
+<!-- Updated description on 5/1 -->
 
 # Features
 Our website application serves as "a BU student’s ideal, all-inclusive app for a night out".  The website requires login through third-party Facebook authentication.  After successfully logging in, the user is taken to our home page where they are presented with main functionalities of the app: decide what drinks to consume, and show where to find them.
@@ -22,7 +22,8 @@ Our website application serves as "a BU student’s ideal, all-inclusive app for
 # How to Deploy
 1) Clone/download LiquorLocator as zip or onto your desktop.
 2) cd into the main LiquorLocator directory via your CLI
-3) Type "node server.js" into your CL
-4) You should see verification via CLI printout statements that the app is up and running.
-5) Open up your internet browser of choice and go to http://localhost:8000
+3) Get access to configuration information from contributor
+4) Type 'node server.js' into your CL
+5) You should see verification via CLI printout statements that the app is up and running.
+6) Open up your internet browser of choice and go to http://localhost:8000
 
