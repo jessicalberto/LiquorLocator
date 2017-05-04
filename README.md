@@ -32,5 +32,4 @@ Our website application serves as "a BU student’s ideal, all-inclusive app for
 * this demonstrates the work done by Megan Horan and Harry Zhao that isnt really reflected in this node implementation of the deliverable
 https://github.com/mrhoran54/cs411_project 
 
-#### * please note that the project deliverables done that accurately reflect the groups divisive progress are in inital project deliverables folder
-#### * project deliverables created specifically for this implementation for the app are in revised project deliverables folder
+#### * project deliverables created specifically for this implementation for the app are in revised project deliverables folder, the inital folder holds the documentation and deliverables from the divided group trajectory
