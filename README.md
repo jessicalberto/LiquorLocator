@@ -32,5 +32,5 @@ Our website application serves as "a BU student’s ideal, all-inclusive app for
 * this demonstrates the work done by Megan Horan and Harry Zhao that isnt really reflected in this node implementation of the deliverable
 https://github.com/mrhoran54/cs411_project 
 
-## * please note that the project deliverables done as a group that accurately reflect the groups progress are in inital project deliverables folder
-## * project deliverables created specifically for this app (yishan and jessica) are in revised project deliverables folder
+### * please note that the project deliverables done as a group that accurately reflect the groups progress are in inital project deliverables folder
+### * project deliverables created specifically for this app (yishan and jessica) are in revised project deliverables folder
