@@ -1,4 +1,5 @@
 # CS411 - Software Engineering: The Liquor Locator
+
 CS 411 - Group 7 Project - Website Application
 
 This is Group 7's GitHub repository for the final stage of project.
@@ -30,3 +31,6 @@ Our website application serves as "a BU student’s ideal, all-inclusive app for
 # link to the flask implentation of the app that we chose to move away from 
 * this demonstrates the work done by Megan Horan and Harry Zhao that isnt really reflected in this node implementation of the deliverable
 https://github.com/mrhoran54/cs411_project 
+
+## * please note that the project deliverables done as a group that accurately reflect the groups progress are in inital project deliverables folder
+## * project deliverables created specifically for this app (yishan and jessica) are in revised project deliverables folder
